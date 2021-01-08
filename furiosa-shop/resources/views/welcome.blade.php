@@ -11,7 +11,7 @@
             <h1>One more for good measure.</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
               metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+            <p><a class="btn btn-lg btn-primary" href="/shop" role="button">Browse gallery</a></p>
           </div>
         </div>
         <div class="carousel-item">
@@ -20,7 +20,7 @@
             <h1>One more for good measure.</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
               metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Contact</a></p>
+            <p><a class="btn btn-lg btn-primary" href="/contact" role="button">Contact</a></p>
           </div>
         </div>
         <div class="carousel-item">
@@ -29,7 +29,7 @@
             <h1>One more for good measure.</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
               metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+            <p><a class="btn btn-lg btn-primary" href="/shop" role="button">Browse gallery</a></p>
           </div>
         </div>
         <div style="top: 100px; left: 0; z-index: 0" class="carousel-caption d-none d-md-block">

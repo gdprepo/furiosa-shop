@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/shop', function () {
-    return view('shop.index');
-});
+Route::get('/shop', 'App\Http\Controllers\HomeController@shop')->name('shop');
+
+
+Route::get('/contact', 'App\Http\Controllers\HomeController@contact')->name('contact');
+
+Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about');
+
+
+// Route::get('/shop', 'HomeController@shop')->name('shop');
+
+
+// Route::get('/shop', function () {
+//     return view('shop.index');
+// });

@@ -61,8 +61,8 @@
         }
 
         .navbar {
-            z-index: 1;
-            position: absolute;
+            z-index: 1000;
+            position: fixed;
             width: 100%;
             background: rgba(0, 0, 0, 0.5);
         }
@@ -111,10 +111,10 @@
                     <a class="nav-link link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link" href="#">About</a>
+                    <a class="nav-link link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link" href="#">Contact</a>
+                    <a class="nav-link link" href="/contact">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link" href="/shop">Shop</a>

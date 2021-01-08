@@ -43,6 +43,18 @@
       $('#filters a').removeClass('active');
       $(this).addClass('active');
     });
+
+    
+    $('select').change('click', function(e) {
+      e.preventDefault();
+      var selectValue = this.value; 
+      console.log(selectValue)
+      $container.isotope({
+        filter: selectValue
+      });
+      $('input option').removeClass('active');
+      $(this).addClass('active');
+    });
   }
   $(window).on('load', function() {
     siteIstotope();

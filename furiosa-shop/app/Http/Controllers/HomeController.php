@@ -6,7 +6,30 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function index() {
-        return view('welcome',);
+    public function index() {
+        return view('welcome');
     }
+
+    public function shop()
+    {
+        return view ('shop.index', [
+
+        ]);
+    }
+
+    public function contact()
+    {
+        return view ('pages.contact', [
+
+        ]);
+    }
+
+    public function about()
+    {
+        return view ('pages.about', [
+
+        ]);
+    }
+
+
 }
