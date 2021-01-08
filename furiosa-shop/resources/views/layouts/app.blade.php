@@ -21,7 +21,8 @@
     <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="<?php echo asset('bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
     <link href="<?php echo asset('icofont/icofont.min.css') ?> " rel="stylesheet">
     <link href="<?php echo asset('aos/aos.css') ?>" rel="stylesheet">
     <link href="<?php echo asset('line-awesome/css/line-awesome.min.css') ?>" rel="stylesheet">
