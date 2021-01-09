@@ -14,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/shop', 'App\Http\Controllers\HomeController@shop')->name('shop');
 
@@ -28,9 +27,17 @@ Route::get('/contact', 'App\Http\Controllers\HomeController@contact')->name('con
 Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about');
 
 
+Route::get('/admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 // Route::get('/shop', 'HomeController@shop')->name('shop');
 
 
 // Route::get('/shop', function () {
 //     return view('shop.index');
 // });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

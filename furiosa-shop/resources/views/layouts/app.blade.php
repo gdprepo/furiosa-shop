@@ -60,6 +60,25 @@
             border-bottom: 2px solid white;
         }
 
+        .activeLink {
+            position: relative;
+            font-size: 20px;
+            margin: 0 30px;
+            font-weight: 200;
+            letter-spacing: 2px;
+        }
+        .activeLink:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            left: 0;
+            bottom: 0px;
+
+            border-bottom: 2px solid white;
+
+        }
+
         .navbar {
             z-index: 1000;
             position: fixed;
@@ -74,6 +93,7 @@
         .featurette-divider {
             margin: 5rem 0;
         }
+
     </style>
 </head>
 
@@ -90,9 +110,17 @@
 
             <div class="nav-menu">
                 <ul>
-                    <li class="active"><a href="#">Categorie1</a></li>
+                    <li><a href="#">Categorie1</a></li>
                     <li><a href="#">Categorie2</a></li>
                     <li><a href="#">Categorie3</a></li>
+                    @if (Auth::check())
+                    @if (Auth::user()->role === "ROLE_ADMIN")
+                    <li><a href="/admin">Admin</a></li>
+                    @endif
+                    @else
+                    <li><a href="/login">Login</a></li>
+                    @endif
+
                 </ul>
             </div>
 
@@ -107,17 +135,17 @@
 
 
             <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto">
-                <li class="nav-item active">
-                    <a class="nav-link link" href="/">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'activeLink' : 'link' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link" href="/about">About</a>
+                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'activeLink' : 'link' }}" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link" href="/contact">Contact</a>
+                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'activeLink' : 'link' }}" href="/contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link" href="/shop">Shop</a>
+                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'activeLink' : 'link' }}" href="/shop">Shop</a>
                 </li>
 
             </ul>
