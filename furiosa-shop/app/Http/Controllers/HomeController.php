@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->user = User::where('name', 'like', 'admin')->first();
+    }
+
+
     public function index() {
-        return view('welcome');
+        //$user = DB::table('users')->where('name', 'like', 'admin')->first();
+
+        return view('welcome', [
+            'user' => $this->user,
+        ]);
     }
 
     public function shop()
@@ -20,6 +32,7 @@ class HomeController extends Controller
     public function contact()
     {
         return view ('pages.contact', [
+            'user' => $this->user,
 
         ]);
     }

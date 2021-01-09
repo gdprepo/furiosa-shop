@@ -79,7 +79,7 @@
                     </li>
                     <li class="mb-3">
                         <strong class="d-block mb-1">Email</strong>
-                        <span>youremail@domain.com</span>
+                        <span>{{ $user->email }}</span>
                     </li>
                 </ul>
             </div>

@@ -34,7 +34,7 @@
         </div>
         <div style="top: 100px; left: 0; z-index: 0" class="carousel-caption d-none d-md-block">
           <div style="margin-left: 15%; width: fit-content; border-left: 5px solid white; padding-left: 15px">
-            <h5 style="font-size: 35px; padding: 0; margin: 0; letter-spacing: 5px; ">Nom Alizée</h5>
+            <h5 style="font-size: 35px; padding: 0; margin: 0; letter-spacing: 5px; ">Nom {{ $user->name}}</h5>
             <p style="font-size: 20px; padding: 0; font-weight: unset;">Peinture / Tatouage</p>
           </div>
 
