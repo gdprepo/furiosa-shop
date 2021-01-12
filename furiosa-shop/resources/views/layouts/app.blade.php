@@ -67,6 +67,7 @@
             font-weight: 200;
             letter-spacing: 2px;
         }
+
         .activeLink:after {
             content: '';
             position: absolute;
@@ -94,6 +95,20 @@
             margin: 5rem 0;
         }
 
+
+        .shopSide {
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+            .nav-item {
+                display: none;
+            }
+
+            .shopSide {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -109,6 +124,19 @@
             </div>
 
             <div class="nav-menu">
+                <div class="shopSide">
+                    <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
+                    <ul>
+                        <li><a href="#">Categorie1</a></li>
+                        <li><a href="#">Categorie2</a></li>
+                        <li><a href="#">Categorie3</a></li>
+
+                    </ul>
+                    <hr>
+
+                </div>
+
+
                 <ul>
                     <li><a href="#">Categorie1</a></li>
                     <li><a href="#">Categorie2</a></li>
@@ -134,7 +162,7 @@
 
 
 
-            <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto">
+            <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto nav-item">
                 <li class="nav-item">
                     <a class="nav-link {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'activeLink' : 'link' }}" href="/">Home</a>
                 </li>
@@ -169,27 +197,27 @@
         @yield('footer')
 
 
-  <!-- Vendor JS Files -->
-  <script src="<?php echo asset('jquery/jquery.min.js')?>"></script>
-  <script src="<?php echo asset('bootstrap/js/bootstrap.bundle.min.js')?> "></script>
-  <script src="<?php echo asset('jquery.easing/jquery.easing.min.js')?>"></script>
-  <script src="<?php echo asset('php-email-form/validate.js')?>"></script>
-  <script src="<?php echo asset('aos/aos.js')?>"></script>
-  <script src="<?php echo asset('isotope-layout/isotope.pkgd.min.js')?>"></script>
-  <script src="<?php echo asset('owl.carousel/owl.carousel.min.js')?>"></script>
+        <!-- Vendor JS Files -->
+        <script src="<?php echo asset('jquery/jquery.min.js') ?>"></script>
+        <script src="<?php echo asset('bootstrap/js/bootstrap.bundle.min.js') ?> "></script>
+        <script src="<?php echo asset('jquery.easing/jquery.easing.min.js') ?>"></script>
+        <script src="<?php echo asset('php-email-form/validate.js') ?>"></script>
+        <script src="<?php echo asset('aos/aos.js') ?>"></script>
+        <script src="<?php echo asset('isotope-layout/isotope.pkgd.min.js') ?>"></script>
+        <script src="<?php echo asset('owl.carousel/owl.carousel.min.js') ?>"></script>
 
-  <!-- Template Main JS File -->
-  <script src="<?php echo asset('js/mainShop.js')?>"></script>
-
-
+        <!-- Template Main JS File -->
+        <script src="<?php echo asset('js/mainShop.js') ?>"></script>
 
 
 
 
-  <script src="<?php echo asset('js/jquery-3.3.1.min.js')?>"></script>
-  <script src="<?php echo asset('js/popper.min.js')?>"></script>
-  <script src="<?php echo asset('js/bootstrap.min.js')?>"></script>
-  <script src="<?php echo asset('js/main.js')?>"></script>
+
+
+        <script src="<?php echo asset('js/jquery-3.3.1.min.js') ?>"></script>
+        <script src="<?php echo asset('js/popper.min.js') ?>"></script>
+        <script src="<?php echo asset('js/bootstrap.min.js') ?>"></script>
+        <script src="<?php echo asset('js/main.js') ?>"></script>
 </body>
 
 </html>
