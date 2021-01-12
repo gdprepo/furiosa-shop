@@ -18,7 +18,7 @@
 </div>
 
 <div style="margin: 30px" class="col-xs4">
-    <a href="" class="btn shadow-1 rounded-1 blue">Modifier le profil</a>
+    <a href="/admin/home" class="btn shadow-1 rounded-1 blue">Modifier la page d'accueil</a>
     <a href="" class="btn shadow-1 rounded-1 blue">Modifier le mot de passe</a>
 </div>
 

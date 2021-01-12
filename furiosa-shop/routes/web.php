@@ -28,6 +28,11 @@ Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about')
 
 
 Route::get('/admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+Route::get('/admin/home', 'App\Http\Controllers\DashboardController@home')->name('dashboard.home');
+
+Route::post('/admin/home/update', 'App\Http\Controllers\DashboardController@homeStore')->name('home.update');
+
+
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

@@ -35,6 +35,7 @@
     <link href="<?php echo asset('icofont/icofont.min.css') ?>" rel="stylesheet">
     <link href="<?php echo asset('aos/aos.css" rel="stylesheet') ?>">
     <link href="<?php echo asset('line-awesome/css/line-awesome.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/css/button.css') }}">
 
 
 

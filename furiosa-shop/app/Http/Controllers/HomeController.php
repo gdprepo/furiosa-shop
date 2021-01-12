@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sliders;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,13 @@ class HomeController extends Controller
 
     public function index() {
         //$user = DB::table('users')->where('name', 'like', 'admin')->first();
+        $slider1 = Sliders::where('name', 'slider1')->first();
+
+        // var_dump($slider1);
 
         return view('welcome', [
             'user' => $this->user,
+            'slider1' => $slider1,
         ]);
     }
 
