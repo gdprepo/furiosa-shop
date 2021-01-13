@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $slider1 = Sliders::where('name', 'slider1')->first();
 
         return view('dashboard.home', [
-            'slider1' => $slider1,
+            'slider' => $slider1,
         ]);
     }
 
@@ -38,9 +38,9 @@ class DashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function homeStore(Request $request)
+    public function sliderStore(Request $request, $id)
     {
-        $slider1 = Sliders::where('name', 'slider1')->first();
+        $slider1 = Sliders::find($id)->first();
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -57,4 +57,15 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard.home')->with('success', 'La page home a bien mise a jour.');
     }
+
+
+    public function sliderEdit($id)
+    {
+        $slider = Sliders::find($id)->first();
+
+        return view('dashboard.sliderHome', [
+            'slider' => $slider,
+        ]);
+    }
+
 }

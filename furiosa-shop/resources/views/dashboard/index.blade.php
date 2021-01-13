@@ -17,8 +17,10 @@
     <div class="col-xs3">{{ $user->email }}</div>
 </div>
 
-<div style="margin: 30px" class="col-xs4">
-    <a href="/admin/home" class="btn shadow-1 rounded-1 blue">Modifier la page d'accueil</a>
+<div style="margin: 30px" class="col-xs4 container mt-5 pt-5">
+    <a href="{{ route('dashboard.home') }}" class="btn shadow-1 rounded-1 blue">Modifier la page d'accueil</a>
+    <a href="{{ route('dashboard.home') }}" class="btn shadow-1 rounded-1 blue">Modifier le profil</a>
+
     <a href="" class="btn shadow-1 rounded-1 blue">Modifier le mot de passe</a>
 </div>
 

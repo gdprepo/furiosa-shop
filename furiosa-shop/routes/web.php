@@ -30,7 +30,10 @@ Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about')
 Route::get('/admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 Route::get('/admin/home', 'App\Http\Controllers\DashboardController@home')->name('dashboard.home');
 
-Route::post('/admin/home/update', 'App\Http\Controllers\DashboardController@homeStore')->name('home.update');
+
+Route::get('/admin/slider/show/{id}', 'App\Http\Controllers\DashboardController@sliderEdit')->name('slider.show');
+Route::post('/admin/slider/update/{id}', 'App\Http\Controllers\DashboardController@sliderStore')->name('slider.update');
+
 
 
 

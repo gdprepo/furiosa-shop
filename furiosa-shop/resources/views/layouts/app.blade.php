@@ -159,7 +159,7 @@
     <main>
         <nav class="navbar navbar-expand-lg navbar-light">
 
-            <a style="color: white" class="navbar-brand" href="#">FURIOZ<strong style="color: black;">ALI</strong></a>
+            <a style="color: white" class="navbar-brand" href="/">FURIOZ<strong style="color: black;">ALI</strong></a>
 
 
 

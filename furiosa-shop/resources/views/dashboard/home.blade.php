@@ -2,41 +2,41 @@
 
 @section('content')
 
-<div class="grix xs2 container">
+<div class=" container">
 
     <div class="col-xs4">
         <h1>Modifier la page HOME
         </h1>
     </div>
 
-    <form method="POST" action="{{ url('/admin/home/update') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Image</span>
-            </div>
-            <div class="custom-file">
-                <input name="image" type="file" class="custom-file-input" id="inputGroupFile01">
-                <label  class="custom-file-label" for="inputGroupFile01">Choose file</label>
-            </div>
-        </div>
-        <div class="col-xs3">
-            <img style="width: 100%" class="d-block" src="{{ asset('uploads/images/' .$slider1->image ) }}" alt="First slide">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Titre: {{ $slider1->title }}</span>
-            </div>
-            <input name="title" type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
-        </div>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Image</th>
+                <th scope="col">Description</th>
+                <th style="text-align: unset;" scope="col"><button style="margin: 0; margin-right: -20%" type="button" class="btn btn-primary">Add</button></th>
 
-        <button style="width: 100%" type="submit" class="btn btn-primary">Enregistrer</button>
-    </form>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ $slider->title }}</td>
+                <td style="width: 26%;"> <img style="width: 100%" class="img-fluid" src="{{ asset('uploads/images/' .$slider->image ) }}" alt="First slide">
+                </td>
+                <td>{{ substr($slider->description, 0, 30) . '...' }}</td>
+                <td>
+                    <a href="{{ url('/admin/slider/show/'.$slider->id) }}">
+                        <button type="button" class="btn btn-success">Edit</button>
+                    </a>
+                </td>
 
-
-
-
+            </tr>
+        </tbody>
+    </table>
 
 </div>
 

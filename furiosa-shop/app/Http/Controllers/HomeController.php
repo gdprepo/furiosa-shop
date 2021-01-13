@@ -17,7 +17,7 @@ class HomeController extends Controller
 
     public function index() {
         //$user = DB::table('users')->where('name', 'like', 'admin')->first();
-        $slider1 = Sliders::where('name', 'slider1')->first();
+        $slider1 = Sliders::where('name', 'slider1')->get();
 
         // var_dump($slider1);
 

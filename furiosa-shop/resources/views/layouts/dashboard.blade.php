@@ -78,10 +78,10 @@
         </div>
 
 
-        <a href="" class="sidenav-link active">Accueil</a>
-        <a href="" class="sidenav-link">Products</a>
-        <a href="" class="sidenav-link">About</a>
-        <a href="" class="sidenav-link">Contact</a>
+        <a href="{{ route('dashboard') }}" class="sidenav-link active">Accueil</a>
+        <a href="{{ route('dashboard') }}" class="sidenav-link">Products</a>
+        <a href="{{ route('dashboard') }}" class="sidenav-link">About</a>
+        <a href="{{ route('dashboard') }}" class="sidenav-link">Contact</a>
 
 
     </div>

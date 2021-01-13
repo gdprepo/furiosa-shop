@@ -5,32 +5,33 @@
 @section('content')
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div style="max-height: 600px;" class="carousel-item active">
-      <img src="{{ asset('uploads/images/' .$slider1->image ) }}" alt="First slide">
+    <?php $check = 0 ?>
+    @foreach($slider1 as $slider)
+
+    @if($check == 0)
+
+    <div style="max-height: 720px;" class="carousel-item active">
+      <img src="{{ asset('uploads/images/' .$slider->image ) }}" alt="First slide">
       <div class="carousel-caption text-right">
-        <h1>{{ $slider1->title }}</h1>
-        <p>{{ $slider1->description }}</p>
+        <h1>{{ $slider->title }}</h1>
+        <p>{{ $slider->description }}</p>
         <a style="width: 30%; max-width: unset;" class="btn btn-lg btn-primary" href="/shop" role="button">Browse gallery</a>
       </div>
     </div>
-    <div style="max-height: 600px;" class="carousel-item">
+    <?php $check++ ?>
+    @else
+    <div style="max-height: 720px;" class="carousel-item">
       <img class="d-block w-100" src="https://via.placeholder.com/1200x600" alt="First slide">
       <div class="carousel-caption text-left">
-        <h1>One more for good measure.</h1>
+        <h1>{{ $slider->title }}</h1>
         <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
           metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
         <p><a class="btn btn-lg btn-primary" href="/contact" role="button">Contact</a></p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="https://via.placeholder.com/1200x600" alt="First slide">
-      <div class="carousel-caption text-right">
-        <h1>One more for good measure.</h1>
-        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-          metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-        <p><a class="btn btn-lg btn-primary" href="/shop" role="button">Browse gallery</a></p>
-      </div>
-    </div>
+    @endif
+    @endforeach
+
     <div style="top: 100px; left: 0; z-index: 0" class="carousel-caption d-none d-md-block">
       <div style="margin-left: 15%; width: fit-content; border-left: 5px solid white; padding-left: 15px">
         <h5 style="font-size: 35px; padding: 0; margin: 0; letter-spacing: 5px; ">Nom {{ $user->name}}</h5>
@@ -53,11 +54,11 @@
 <section style="padding-bottom: 0px;" class="section site-portfolio">
   <div class="container">
     <div class="row mb-5 align-items-center">
-      <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
+      <div class="col-md-12 col-lg-6 mb-4 mb-lg-0">
         <h2>Hey, I'm Alizee Nom</h2>
         <p class="mb-0">Freelance Creative &amp; Professional Graphics Designer</p>
       </div>
-      <div class="col-md-12 col-lg-6 text-left text-lg-right" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-md-12 col-lg-6 text-left text-lg-right" data-aos-delay="100">
         <div id="filters" class="filters">
           <a href="#" data-filter="*" class="active">All</a>
           <a href="#" data-filter=".web">Web</a>
