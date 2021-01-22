@@ -3,6 +3,102 @@
 
 
 @section('content')
+<style>
+  .center-con {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(90deg);
+  }
+
+
+  .round {
+    position: absolute;
+    border: 2px solid white;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+
+  }
+
+  #cta {
+    width: 100%;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  #cta .arrow {
+    left: 30%;
+    top: 12px
+  }
+
+  .arrow {
+    position: absolute;
+    bottom: 0;
+    margin-left: 0;
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+    top: 15px;
+  }
+
+  .segunda {
+    margin-left: 8px;
+  }
+
+  .next {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHN0eWxlPi5zdDB7ZmlsbDojZmZmfTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTMxOS4xIDIxN2MyMC4yIDIwLjIgMTkuOSA1My4yLS42IDczLjdzLTUzLjUgMjAuOC03My43LjZsLTE5MC0xOTBjLTIwLjEtMjAuMi0xOS44LTUzLjIuNy03My43UzEwOSA2LjggMTI5LjEgMjdsMTkwIDE5MHoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzE5LjEgMjkwLjVjMjAuMi0yMC4yIDE5LjktNTMuMi0uNi03My43cy01My41LTIwLjgtNzMuNy0uNmwtMTkwIDE5MGMtMjAuMiAyMC4yLTE5LjkgNTMuMi42IDczLjdzNTMuNSAyMC44IDczLjcuNmwxOTAtMTkweiIvPjwvc3ZnPg==');
+  }
+
+  @keyframes bounceAlpha {
+				0% {
+					opacity: 1;
+					transform: translateX(0px) scale(1);
+				}
+				25% {
+					opacity: 0;
+					transform: translateX(10px) scale(0.9);
+				}
+				26% {
+					opacity: 0;
+					transform: translateX(-10px) scale(0.9);
+				}
+				55% {
+					opacity: 1;
+					transform: translateX(0px) scale(1);
+				}
+			}
+
+			.bounceAlpha {
+				animation-name: bounceAlpha;
+				animation-duration: 1.4s;
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+
+			.arrow.primera.bounceAlpha {
+				animation-name: bounceAlpha;
+				animation-duration: 1.4s;
+				animation-delay: 0.2s;
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+
+			.round:hover .arrow {
+				animation-name: bounceAlpha;
+				animation-duration: 1.4s;
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+			.round:hover .arrow.primera {
+				animation-name: bounceAlpha;
+				animation-duration: 1.4s;
+				animation-delay: 0.2s;
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;
+			}
+</style>
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <?php $check = 0 ?>
@@ -21,11 +117,10 @@
     <?php $check++ ?>
     @else
     <div style="max-height: 720px;" class="carousel-item">
-      <img class="d-block w-100" src="https://via.placeholder.com/1200x600" alt="First slide">
+      <img class="d-block w-100" src="{{ $slider->image != 'https://via.placeholder.com/1200x600' ? asset('uploads/images/' .$slider->image ) : 'https://via.placeholder.com/1200x600' }}" alt="First slide">
       <div class="carousel-caption text-left">
         <h1>{{ $slider->title }}</h1>
-        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-          metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        <p>{{ $slider->description }}</p>
         <p><a class="btn btn-lg btn-primary" href="/contact" role="button">Contact</a></p>
       </div>
     </div>
@@ -49,9 +144,17 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+  <div class="center-con">
+    <div style="background-color: black" class="round">
+      <div id="cta">
+        <span class="arrow primera next "></span>
+        <span class="arrow segunda next "></span>
+      </div>
+    </div>
+  </div>
 </div>
 
-<section style="padding-bottom: 0px;" class="section site-portfolio">
+<section id="shop" style="padding-bottom: 0px;" class="section site-portfolio">
   <div class="container">
     <div class="row mb-5 align-items-center">
       <div class="col-md-12 col-lg-6 mb-4 mb-lg-0">
@@ -191,4 +294,18 @@
     </div>
   </div>
 </footer>
+@endsection
+
+@section('script-extra')
+
+<script>
+  $('.round').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.arrow').toggleClass('bounceAlpha');
+    $(window).scrollTop($('#shop').offset().top);
+
+  });
+</script>
+
 @endsection

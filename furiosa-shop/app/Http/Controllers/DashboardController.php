@@ -24,10 +24,10 @@ class DashboardController extends Controller
 
     public function home()
     {
-        $slider1 = Sliders::where('name', 'slider1')->first();
+        $slider1 = Sliders::where('name', 'slider1')->get();
 
         return view('dashboard.home', [
-            'slider' => $slider1,
+            'sliders' => $slider1,
         ]);
     }
 
@@ -40,7 +40,7 @@ class DashboardController extends Controller
      */
     public function sliderStore(Request $request, $id)
     {
-        $slider1 = Sliders::find($id)->first();
+        $slider1 = Sliders::find($id);
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -61,7 +61,7 @@ class DashboardController extends Controller
 
     public function sliderEdit($id)
     {
-        $slider = Sliders::find($id)->first();
+        $slider = Sliders::find($id);
 
         return view('dashboard.sliderHome', [
             'slider' => $slider,

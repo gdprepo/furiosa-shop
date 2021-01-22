@@ -5,7 +5,7 @@
 <div class="grix xs2 container">
 
     <div class="col-xs4">
-        <h1>Modifier le SLIDER
+        <h1>Modifier le SLIDER {{ $slider->id }}
         </h1>
     </div>
 
@@ -21,13 +21,13 @@
             </div>
         </div>
         <div class="col-xs3">
-            <img style="width: 100%" class="d-block" src="{{ asset('uploads/images/' .$slider->image ) }}" alt="First slide">
+            <img style="width: 100%" class="d-block" src="{{ $slider->image != 'https://via.placeholder.com/1200x600' ? asset('uploads/images/' .$slider->image ) : 'https://via.placeholder.com/1200x600' }}" alt="First slide">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Titre: {{ $slider->title }}</span>
             </div>
-            <input name="title" type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
+            <input value="{{ $slider->title }}" name="title" type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
         </div>
 
 

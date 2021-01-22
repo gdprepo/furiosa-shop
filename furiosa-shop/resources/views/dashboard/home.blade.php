@@ -22,19 +22,22 @@
             </tr>
         </thead>
         <tbody>
+        @foreach($sliders as $slider)
+
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">{{ $slider->id }}</th>
                 <td>{{ $slider->title }}</td>
-                <td style="width: 26%;"> <img style="width: 100%" class="img-fluid" src="{{ asset('uploads/images/' .$slider->image ) }}" alt="First slide">
+                <td style="width: 26%;"> <img style="width: 100%" class="img-fluid" src="{{ $slider->image != 'https://via.placeholder.com/1200x600' ? asset('uploads/images/' .$slider->image ) : 'https://via.placeholder.com/1200x600' }}" alt="First slide">
                 </td>
                 <td>{{ substr($slider->description, 0, 30) . '...' }}</td>
                 <td>
-                    <a href="{{ url('/admin/slider/show/'.$slider->id) }}">
+                    <a href="{{ route('slider.show', $slider->id) }}">
                         <button type="button" class="btn btn-success">Edit</button>
                     </a>
                 </td>
 
             </tr>
+            @endforeach
         </tbody>
     </table>
 
