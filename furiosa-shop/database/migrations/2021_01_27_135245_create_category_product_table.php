@@ -14,8 +14,8 @@ class CreateCategoryProductTable extends Migration
     public function up()
     {
         Schema::create('category_product', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('category_id');
+            $table->increments('id');
+            $table->unsignedinteger('category_id');
             $table->foreign('category_id')
                     ->references('id')
                     ->on('categories')
@@ -24,7 +24,7 @@ class CreateCategoryProductTable extends Migration
                     ->references('id')
                     ->on('products')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedinteger('product_id');
 
             $table->timestamps();
         });

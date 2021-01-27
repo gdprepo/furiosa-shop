@@ -13,9 +13,9 @@ class CreateAddImagesToProductTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->text('images')->nullable()->after('image');
-        });
+        // Schema::table('products', function (Blueprint $table) {
+        //     $table->json('images')->nullable()->after('image');
+        // });
     }
 
     /**

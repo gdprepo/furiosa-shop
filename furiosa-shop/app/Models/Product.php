@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $guarded = [
+        'id', 'title'
+    ];
+
     public function getPrice()
     {
         $price = $this->price / 100;
@@ -14,8 +18,16 @@ class Product extends Model
         return number_format($price, 2, ',', ' ') . ' €';
     }
 
+
+    public function images()
+    {
+        return $this->belongsToMany('App\Models\Image', 'image_product');
+    }
+
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category');
     }
+
+
 }

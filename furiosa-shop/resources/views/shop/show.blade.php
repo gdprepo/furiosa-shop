@@ -17,7 +17,7 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 
 <div style="position: absolute; margin-top: 150px;" class="">
-    <div style="margin-left: 8%; margin-right: auto !important; background-color: rgba(0, 0, 0, 0.5); width: 85%; padding: 50px 50px" class="row">
+    <div style="margin-left: 8%; margin-right: auto !important;  width: 85%;" class="row">
         <div  class="col-6">
             <img  style="width: 80%;" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
 
@@ -26,12 +26,12 @@ $pageencours = $_SERVER['REQUEST_URI'];
         </div>
         <div class="col-5">
             <div style="width: 100%">
-                <h2 style="font-size: 1.5em" class="mb-4 mt-4">{{ $product->title }}</h2>
+                <h2 style="font-size: 1.5em; color: white;" class="mb-4 mt-4">{{ $product->title }}</h2>
 
             </div>
             @if ($iPhone || $iPad || $iPad || $Android)
             @else
-            <span class="mb-5">{!! $product->description !!}<br></span>
+            <span style="color: white;" class="mb-5">{!! $product->description !!}<br></span>
             @endif
 
             @if ($iPhone || $iPad || $iPad || $Android)
