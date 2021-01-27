@@ -36,6 +36,8 @@
     <link href="<?php echo asset('aos/aos.css" rel="stylesheet') ?>">
     <link href="<?php echo asset('line-awesome/css/line-awesome.min.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/css/button.css') }}">
+    <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+
 
 
 

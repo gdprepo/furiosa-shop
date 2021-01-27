@@ -18,8 +18,10 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 <div style="position: absolute; margin-top: 150px;" class="">
     <div style="margin-left: 8%; margin-right: auto !important; background-color: rgba(0, 0, 0, 0.5); width: 85%; padding: 50px 50px" class="row">
-        <div class="col-6">
-            <img class="img-fluid" style="width: 80%;" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
+        <div  class="col-6">
+            <img  style="width: 80%;" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
+
+
 
         </div>
         <div class="col-5">
@@ -72,5 +74,16 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 
 
+
+@endsection
+
+@section('script-extra')
+<script src="<?php echo asset('js/jquery.elevatezoom.js') ?>"></script>
+<script src="<?php echo asset('js/zoomsl.min.js') ?>"></script>
+
+<script>
+
+
+</script>
 
 @endsection
