@@ -20,6 +20,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 
 Route::get('/shop', 'App\Http\Controllers\HomeController@shop')->name('shop');
+Route::get('/shop/{id}', 'App\Http\Controllers\HomeController@show')->name('shop.show');
+
 
 
 Route::get('/contact', 'App\Http\Controllers\HomeController@contact')->name('contact');

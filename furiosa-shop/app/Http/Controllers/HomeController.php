@@ -40,6 +40,15 @@ class HomeController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $product = Product::find($id);
+
+        return view ('shop.show', [
+            'product' => $product,
+        ]);
+    }
+
     public function contact()
     {
         return view ('pages.contact', [

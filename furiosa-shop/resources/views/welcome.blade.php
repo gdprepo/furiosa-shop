@@ -177,7 +177,10 @@
     <?php $index = 0; ?>
     <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
       @foreach($products as $product)
-      @if ($index < 10) <?php
+      @if ($index < 10)
+      
+      
+       <?php
                         $categories = [];
                         foreach ($product->categories as $category) {
                           // $categories = $category->name;
@@ -188,7 +191,7 @@
       {{ implode(' ', $categories) }}
       
        col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
+        <a href="/shop/{{ $product->id }}" class="item-wrap fancybox">
           <div class="work-info">
             <h3>{{ $product->title }}</h3>
             <span>{{ $categories[0] }}<br></span>
