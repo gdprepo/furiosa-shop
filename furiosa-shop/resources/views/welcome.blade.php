@@ -51,52 +51,56 @@
   }
 
   @keyframes bounceAlpha {
-				0% {
-					opacity: 1;
-					transform: translateX(0px) scale(1);
-				}
-				25% {
-					opacity: 0;
-					transform: translateX(10px) scale(0.9);
-				}
-				26% {
-					opacity: 0;
-					transform: translateX(-10px) scale(0.9);
-				}
-				55% {
-					opacity: 1;
-					transform: translateX(0px) scale(1);
-				}
-			}
+    0% {
+      opacity: 1;
+      transform: translateX(0px) scale(1);
+    }
 
-			.bounceAlpha {
-				animation-name: bounceAlpha;
-				animation-duration: 1.4s;
-				animation-iteration-count: infinite;
-				animation-timing-function: linear;
-			}
+    25% {
+      opacity: 0;
+      transform: translateX(10px) scale(0.9);
+    }
 
-			.arrow.primera.bounceAlpha {
-				animation-name: bounceAlpha;
-				animation-duration: 1.4s;
-				animation-delay: 0.2s;
-				animation-iteration-count: infinite;
-				animation-timing-function: linear;
-			}
+    26% {
+      opacity: 0;
+      transform: translateX(-10px) scale(0.9);
+    }
 
-			.round:hover .arrow {
-				animation-name: bounceAlpha;
-				animation-duration: 1.4s;
-				animation-iteration-count: infinite;
-				animation-timing-function: linear;
-			}
-			.round:hover .arrow.primera {
-				animation-name: bounceAlpha;
-				animation-duration: 1.4s;
-				animation-delay: 0.2s;
-				animation-iteration-count: infinite;
-				animation-timing-function: linear;
-			}
+    55% {
+      opacity: 1;
+      transform: translateX(0px) scale(1);
+    }
+  }
+
+  .bounceAlpha {
+    animation-name: bounceAlpha;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .arrow.primera.bounceAlpha {
+    animation-name: bounceAlpha;
+    animation-duration: 1.4s;
+    animation-delay: 0.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .round:hover .arrow {
+    animation-name: bounceAlpha;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .round:hover .arrow.primera {
+    animation-name: bounceAlpha;
+    animation-duration: 1.4s;
+    animation-delay: 0.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
 </style>
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -107,7 +111,7 @@
     @if($check == 0)
 
     <div style="max-height: 720px;" class="carousel-item active">
-      <img src="{{ asset('uploads/images/' .$slider->image ) }}" alt="First slide">
+      <img class="d-block w-100" src="{{ $slider->image != 'https://via.placeholder.com/1200x600' ? asset('uploads/images/' .$slider->image ) : 'https://via.placeholder.com/1200x600' }}" alt="First slide">
       <div class="carousel-caption text-right">
         <h1>{{ $slider->title }}</h1>
         <p>{{ $slider->description }}</p>
@@ -164,69 +168,86 @@
       <div class="col-md-12 col-lg-6 text-left text-lg-right" data-aos-delay="100">
         <div id="filters" class="filters">
           <a href="#" data-filter="*" class="active">All</a>
-          <a href="#" data-filter=".web">Web</a>
-          <a href="#" data-filter=".design">Design</a>
-          <a href="#" data-filter=".branding">Branding</a>
-          <a href="#" data-filter=".photography">Photography</a>
+          @foreach($categories as $category)
+          <a href="#" data-filter=".{{ $category->name }}">{{ $category->name }}</a>
+          @endforeach
         </div>
       </div>
     </div>
+    <?php $index = 0; ?>
     <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-      <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
+      @foreach($products as $product)
+      @if ($index < 10) <?php
+                        $categories = [];
+                        foreach ($product->categories as $category) {
+                          // $categories = $category->name;
+                          array_push($categories, $category->name);
+                        }
+
+                        ?> <div class="item
+      {{ implode(' ', $categories) }}
+      
+       col-sm-6 col-md-4 col-lg-4 mb-4">
         <a href="work-single.html" class="item-wrap fancybox">
           <div class="work-info">
-            <h3>Boxed Water</h3>
-            <span>Web</span>
+            <h3>{{ $product->title }}</h3>
+            <span>{{ $categories[0] }}<br></span>
+            <span>{{ $product->getPrice() }}</span>
+
           </div>
-          <img class="img-fluid" src="images/img_1.jpg">
+          <img class="img-fluid" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}">
         </a>
-      </div>
-      <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Build Indoo</h3>
-            <span>Photography</span>
-          </div>
-          <img class="img-fluid" src="images/img_2.jpg">
-        </a>
-      </div>
-      <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Cocooil</h3>
-            <span>Branding</span>
-          </div>
-          <img class="img-fluid" src="images/img_3.jpg">
-        </a>
-      </div>
-      <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Nike Shoe</h3>
-            <span>Design</span>
-          </div>
-          <img class="img-fluid" src="images/img_4.jpg">
-        </a>
-      </div>
-      <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Kitchen Sink</h3>
-            <span>Photography</span>
-          </div>
-          <img class="img-fluid" src="images/img_5.jpg">
-        </a>
-      </div>
-      <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Amazon</h3>
-            <span>brandingn</span>
-          </div>
-          <img class="img-fluid" src="images/img_6.jpg">
-        </a>
-      </div>
     </div>
+    @endif
+    <?php $index++; ?>
+
+    @endforeach
+    <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Build Indoo</h3>
+          <span>Photography</span>
+        </div>
+        <img class="img-fluid" src="images/img_2.jpg">
+      </a>
+    </div>
+    <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Cocooil</h3>
+          <span>Branding</span>
+        </div>
+        <img class="img-fluid" src="images/img_3.jpg">
+      </a>
+    </div>
+    <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Nike Shoe</h3>
+          <span>Design</span>
+        </div>
+        <img class="img-fluid" src="images/img_4.jpg">
+      </a>
+    </div>
+    <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Kitchen Sink</h3>
+          <span>Photography</span>
+        </div>
+        <img class="img-fluid" src="images/img_5.jpg">
+      </a>
+    </div>
+    <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Amazon</h3>
+          <span>brandingn</span>
+        </div>
+        <img class="img-fluid" src="images/img_6.jpg">
+      </a>
+    </div>
+  </div>
   </div>
   <div class="buttons">
     <div class="containerButton">

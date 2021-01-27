@@ -34,6 +34,9 @@ Route::get('/admin/home', 'App\Http\Controllers\DashboardController@home')->name
 Route::get('/admin/slider/show/{id}', 'App\Http\Controllers\DashboardController@sliderEdit')->name('slider.show');
 Route::post('/admin/slider/update/{id}', 'App\Http\Controllers\DashboardController@sliderStore')->name('slider.update');
 
+Route::get('/admin/slider/new', 'App\Http\Controllers\DashboardController@sliderNew')->name('slider.new');
+Route::post('/admin/slider/add', 'App\Http\Controllers\DashboardController@sliderAdd')->name('slider.add');
+Route::post('/admin/slider/delete/{id}', 'App\Http\Controllers\DashboardController@sliderDelete')->name('slider.delete');
 
 
 

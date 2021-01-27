@@ -77,8 +77,8 @@
             </button>
         </div>
 
-
-        <a href="{{ route('dashboard') }}" class="sidenav-link active">Accueil</a>
+        <a href="{{ route('dashboard') }}" class="sidenav-link ">Dashboard</a>
+        <a href="{{ route('dashboard.home') }}" class="sidenav-link ">Accueil</a>
         <a href="{{ route('dashboard') }}" class="sidenav-link">Products</a>
         <a href="{{ route('dashboard') }}" class="sidenav-link">About</a>
         <a href="{{ route('dashboard') }}" class="sidenav-link">Contact</a>

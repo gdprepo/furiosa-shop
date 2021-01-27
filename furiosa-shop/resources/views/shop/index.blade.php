@@ -31,11 +31,11 @@
 
         <div id="filters" class="filters">
           <a href="#" data-filter="*" class="active">All</a>
-          <a href="#" data-filter=".web">Web</a>
+          <a href="#" data-filter=".web\.petit">Web</a>
           <a href="#" data-filter=".design">Design</a>
           <a href="#" data-filter=".branding">Branding</a>
           <a href="#" data-filter=".photography">Photography</a>
-          <select id="filters2" class="filters" aria-label="Default select example">
+          <select style="border: none;" id="filters2" class="filters" aria-label="Default select example">
 
             <option value="" selected>Choisir une taille</option>
             <option value=".petit">Petit</option>

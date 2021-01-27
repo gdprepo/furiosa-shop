@@ -68,4 +68,45 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function sliderNew()
+    {
+        return view('dashboard.sliderAdd', [
+        ]);
+    }
+
+    public function sliderAdd(Request $request)
+    {
+        $slider1 = new Sliders();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/images/', $filename);
+            $slider1->image = $filename;
+        }
+
+        $slider1->name = "slider1";
+    
+        $slider1->title = $request->input('title');
+
+        if ($slider1->description != null) {
+            $slider1->description = $request->input('description');
+        }
+
+            $slider1->save();
+
+
+        return redirect()->route('dashboard.home')->with('success', 'Le slider à bien été créé.');
+    }
+
+    public function sliderDelete(Request $request, $id)
+    {
+        $slider = Sliders::find($id);
+        $slider->delete();
+
+        return redirect()->route('dashboard.home')->with('success', 'Le slider à bien été suprimé.');
+
+    }
+
 }
