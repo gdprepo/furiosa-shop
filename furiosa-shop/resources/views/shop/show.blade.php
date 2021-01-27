@@ -18,8 +18,8 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 <div style="position: absolute; margin-top: 150px;" class="">
     <div style="margin-left: 8%; margin-right: auto !important;  width: 85%;" class="row">
-        <div  class="col-6">
-            <img  style="width: 80%;" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
+        <div class="col-6">
+            <img style="width: 80%;" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
 
 
 
@@ -55,6 +55,21 @@ $pageencours = $_SERVER['REQUEST_URI'];
             <div style="margin-top: 50px;">
                 <strong style="color: white; font-size: 30px; margin-top: 30px" class="mb-4 mt-5">{{ $product->getPrice() }}</strong>
 
+
+                <div style="margin-top: 50px; margin-left: -5%">
+                    <?php
+
+                    foreach ($product->images as $image) {
+
+                        echo '
+                <img style="width: 20%" src="' . $image->name . '" alt="">
+                        
+                        ';
+                    }
+
+
+                    ?>
+                </div>
             </div>
 
             @endif

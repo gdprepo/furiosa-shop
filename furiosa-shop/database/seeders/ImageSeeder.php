@@ -15,27 +15,27 @@ class ImageSeeder extends Seeder
     public function run()
     {
         Image::create([
-            'name' => 'https://via.placeholder.com/450x450',
+            'name' => 'https://via.placeholder.com/500x500',
             'slug' => 'high-tech'
         ]);
 
         Image::create([
-            'name' => 'https://via.placeholder.com/450x450',
+            'name' => 'https://via.placeholder.com/500x500',
             'slug' => 'livres'
         ]);
 
         Image::create([
-            'name' => 'https://via.placeholder.com/450x450',
+            'name' => 'https://via.placeholder.com/500x500',
             'slug' => 'meubles'
         ]);
 
         Image::create([
-            'name' => 'https://via.placeholder.com/450x450',
+            'name' => 'https://via.placeholder.com/500x500',
             'slug' => 'jeux'
         ]);
 
         Image::create([
-            'name' => 'https://via.placeholder.com/450x450',
+            'name' => 'https://via.placeholder.com/500x500',
             'slug' => 'nourriture'
         ]);
     }

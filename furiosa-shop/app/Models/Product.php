@@ -21,7 +21,7 @@ class Product extends Model
 
     public function images()
     {
-        return $this->belongsToMany('App\Models\Image', 'image_product');
+        return $this->belongsToMany('App\Models\Image');
     }
 
     public function categories()
