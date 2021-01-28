@@ -18,9 +18,9 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 <div style="position: absolute; margin-top: 150px;" class="">
     <div style="margin-left: 8%; margin-right: auto !important;  width: 85%;" class="row">
-        <div class="col-6">
-            <img style="width: 80%;" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
+        <div style="margin-right: 8%" class="col-md-6">
 
+            <figure id="mainImg" style="width: 100%;" class="zoo-item" data-zoo-image="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}"></figure>
 
 
         </div>
@@ -54,28 +54,29 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
             <div style="margin-top: 50px;">
                 <div style="display: flex">
-                <strong style="color: white; font-size: 30px; margin-top: 30px; width: 100%" class="mb-4 mt-5">{{ $product->getPrice() }}</strong>
-                <div style="width: 100%" class="buttons">
-                    <div style="background: none;" class="containerButton">
-                        <a style="background: white;" href="/shop" class="btnPlus effect04" data-sm-link-text="Ajouter" target="_blank"><span>Add</span></a>
+                    <strong style="color: white; font-size: 30px; margin-top: 30px; width: 100%" class="mb-4 mt-5">{{ $product->getPrice() }}</strong>
+                    <div style="width: 100%" class="buttons">
+                        <div style="background: none;" class="containerButton">
+                            <a style="background: white;" href="/shop" class="btnPlus effect04" data-sm-link-text="Ajouter" target="_blank"><span>Add</span></a>
+                        </div>
                     </div>
-                </div>                
                 </div>
 
 
-                <div style="margin-top: 50px; margin-left: -5%">
+                <div style="margin-top: 50px; margin-left: -5%;">
+                    <img class="img-thumbnail img-fluid" style=" max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
+
                     <?php
 
                     foreach ($product->images as $image) {
-
-                        echo '
-                <img style="width: 20%" src="' . $image->name . '" alt="">
-                        
-                        ';
-                    }
-
-
                     ?>
+
+
+                        <img class="img-thumbnail" style="max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
+
+                    <?php } ?>
+
+
                 </div>
             </div>
 
@@ -100,12 +101,33 @@ $pageencours = $_SERVER['REQUEST_URI'];
 @endsection
 
 @section('script-extra')
-<script src="<?php echo asset('js/jquery.elevatezoom.js') ?>"></script>
-<script src="<?php echo asset('js/zoomsl.min.js') ?>"></script>
+<script src="<?php echo asset('js/zoom.js') ?>"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zoomove/1.2.1/zoomove.min.js"></script>
 <script>
+        $('.zoo-item').ZooMove();
+
+    $(document).ready(function() {
+
+        var thumbnails = document.querySelectorAll('.img-thumbnail');
+        var mainImg = document.getElementById('mainImg');
+        var img = document.getElementsByClassName('zoo-item');
 
 
+        thumbnails.forEach((element) => element.addEventListener('click', changeImg));
+
+        function changeImg(e) {
+            // mainImg.innerHTML = '';
+            mainImg.setAttribute('data-zoo-image', this.src);
+            // $( ".zoo-item" ).remove();
+            $('.zoo-img').css('background-image', 'url("' + this.src + '")');
+            // $('.zoo-item').ZooMove();
+
+            // $('.zoo-item').ZooMove();
+
+            // document.getElementById("linkImg").setAttribute("href", this.src);
+        }
+    })
 </script>
 
 @endsection

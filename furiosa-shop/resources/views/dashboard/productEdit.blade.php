@@ -11,6 +11,14 @@
 
     <form method="POST" action="{{ url('/admin/product/update/' .$product->id) }}" enctype="multipart/form-data">
         @csrf
+        
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Titre: {{ $product->title }}</span>
+            </div>
+            <input value="{{ $product->title }}" name="title" type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
+        </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Image</span>
@@ -21,14 +29,24 @@
             </div>
         </div>
         <div class="col-xs3">
-            <img style="width: 100%" class="d-block" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
+            <img style="width: 100%" class="d-block" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
         </div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Titre: {{ $product->title }}</span>
+                <span class="input-group-text">Images</span>
             </div>
-            <input value="{{ $product->title }}" name="title" type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
+            <div class="custom-file">
+                <input multiple="multiple" name="images[]" type="file" class="custom-file-input" id="inputGroupFile02">
+                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+            </div>
         </div>
+        <div style="display: flex;" class="col-xs3">
+            @foreach($product->images as $image)
+            <img style="width: 23%; height: 100px; padding: 10px" class="d-block" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
+            @endforeach
+        </div>
+
         <div class="col-xs3form-group">
             <label>Category : 
             <?php  $name = ""; ?>

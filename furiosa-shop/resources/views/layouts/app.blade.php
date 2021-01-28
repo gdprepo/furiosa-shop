@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="{{ asset('/css/button.css') }}">
     <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/zoomove/1.2.1/zoomove.min.css">
+    <link rel="stylesheet" href="<?php echo asset('css/zoom.css') ?>">
 
 
 

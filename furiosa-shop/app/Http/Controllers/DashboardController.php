@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Sliders;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -76,9 +77,10 @@ class DashboardController extends Controller
 
         $product->title = $request->input('title');
 
-        $product->categories()->sync([]);
 
         if ($request->input('categories')) {
+            $product->categories()->sync([]);
+
             foreach ($request->input('categories') as $category) {
 
                 $category_id  = Category::where('name', $category)->first();
@@ -90,6 +92,55 @@ class DashboardController extends Controller
         }
 
 
+
+
+            if ($request->hasFile('images')) {
+                $product->images()->sync([]);
+
+                foreach ($request->file('images') as $file) {
+                    $extension = $file->getClientOriginalName();
+                    $filename = time() . '.' . $extension;
+                    $file->move(public_path() . '/uploads/products/', $filename);
+
+                    $image  = new Image();
+                    $image->name = $filename;
+                    $image->slug = $filename;
+                    $image->save();
+    
+                    $product->images()->attach([
+                        $image->id
+                    ]);
+
+                }
+
+
+            // foreach ($request->file('images') as $image) {
+            //     $file = $image;
+            //     $extension = $file->getClientOriginalName();
+            //     $filename = time() . '.' . $extension;
+            //     $file->move(public_path() . '/uploads/products/', $filename);
+
+            //     $image  = new Image();
+            //     $image->name = $filename;
+            //     $image->slug = $filename;
+            //     $image->save();
+
+            //     $product->images()->attach([
+            //         $image->id
+            //     ]);
+            // }
+
+            // foreach ($_FILES['images'] as $image) {
+
+            //     $file = $image;
+            //     $extension = $file->getClientOriginalName();
+            //     $filename = time() . '.' . $extension;
+            //     $file->move(public_path() . '/uploads/products/', $filename);
+
+
+
+            // }
+        }
 
 
         $product->save();
