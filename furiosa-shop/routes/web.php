@@ -31,6 +31,11 @@ Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about')
 
 Route::get('/admin', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 Route::get('/admin/home', 'App\Http\Controllers\DashboardController@home')->name('dashboard.home');
+Route::get('/admin/products', 'App\Http\Controllers\DashboardController@products')->name('dashboard.products');
+
+Route::get('/admin/product/show/{id}', 'App\Http\Controllers\DashboardController@productEdit')->name('produit.show');
+Route::post('/admin/product/update/{id}', 'App\Http\Controllers\DashboardController@productStore')->name('product.update');
+
 
 
 Route::get('/admin/slider/show/{id}', 'App\Http\Controllers\DashboardController@sliderEdit')->name('slider.show');

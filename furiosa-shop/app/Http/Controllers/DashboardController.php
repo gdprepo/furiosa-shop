@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Sliders;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +33,67 @@ class DashboardController extends Controller
         ]);
     }
 
+
+    public function products()
+    {
+        $products = Product::all();
+
+        return view('dashboard.products', [
+            'products' => $products,
+        ]);
+    }
+
+
+    public function productEdit($id)
+    {
+        $product = Product::find($id);
+        $categories = Category::all();
+
+        return view('dashboard.productEdit', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
+    }
+
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function productStore(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/products/', $filename);
+            $product->image = $filename;
+            $product->save();
+        }
+
+        $product->title = $request->input('title');
+
+        $product->categories()->sync([]);
+
+        foreach($request->input('categories') as $category) {
+
+            $category_id  = Category::where('name', $category)->first();
+
+            $product->categories()->attach([
+                $category_id->id
+            ]);
+        }
+
+
+
+
+        $product->save();
+
+        return redirect()->route('dashboard.products')->with('success', 'La page home a bien mise a jour.');
+    }
 
     /**
      * Store a newly created resource in storage.
