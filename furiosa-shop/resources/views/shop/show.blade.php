@@ -19,7 +19,7 @@ $pageencours = $_SERVER['REQUEST_URI'];
 <div style="position: absolute; margin-top: 150px;" class="">
     <div style="margin-left: 8%; margin-right: auto !important;  width: 85%;" class="row">
         <div class="col-6">
-            <img style="width: 80%;" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
+            <img style="width: 80%;" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="{{ $product->title }}">
 
 
 
@@ -53,7 +53,14 @@ $pageencours = $_SERVER['REQUEST_URI'];
             @else
 
             <div style="margin-top: 50px;">
-                <strong style="color: white; font-size: 30px; margin-top: 30px" class="mb-4 mt-5">{{ $product->getPrice() }}</strong>
+                <div style="display: flex">
+                <strong style="color: white; font-size: 30px; margin-top: 30px; width: 100%" class="mb-4 mt-5">{{ $product->getPrice() }}</strong>
+                <div style="width: 100%" class="buttons">
+                    <div style="background: none;" class="containerButton">
+                        <a style="background: white;" href="/shop" class="btnPlus effect04" data-sm-link-text="Ajouter" target="_blank"><span>Add</span></a>
+                    </div>
+                </div>                
+                </div>
 
 
                 <div style="margin-top: 50px; margin-left: -5%">

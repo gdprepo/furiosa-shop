@@ -198,7 +198,7 @@
             <span>{{ $product->getPrice() }}</span>
 
           </div>
-          <img class="img-fluid" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/images/' .$product->image ) : 'https://via.placeholder.com/450x450' }}">
+          <img class="img-fluid" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}">
         </a>
     </div>
     @endif

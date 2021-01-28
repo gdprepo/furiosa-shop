@@ -55,7 +55,7 @@ class DashboardController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,13 +78,15 @@ class DashboardController extends Controller
 
         $product->categories()->sync([]);
 
-        foreach($request->input('categories') as $category) {
+        if ($request->input('categories')) {
+            foreach ($request->input('categories') as $category) {
 
-            $category_id  = Category::where('name', $category)->first();
+                $category_id  = Category::where('name', $category)->first();
 
-            $product->categories()->attach([
-                $category_id->id
-            ]);
+                $product->categories()->attach([
+                    $category_id->id
+                ]);
+            }
         }
 
 
@@ -133,8 +135,7 @@ class DashboardController extends Controller
 
     public function sliderNew()
     {
-        return view('dashboard.sliderAdd', [
-        ]);
+        return view('dashboard.sliderAdd', []);
     }
 
     public function sliderAdd(Request $request)
@@ -150,14 +151,14 @@ class DashboardController extends Controller
         }
 
         $slider1->name = "slider1";
-    
+
         $slider1->title = $request->input('title');
 
         if ($slider1->description != null) {
             $slider1->description = $request->input('description');
         }
 
-            $slider1->save();
+        $slider1->save();
 
 
         return redirect()->route('dashboard.home')->with('success', 'Le slider à bien été créé.');
@@ -169,7 +170,5 @@ class DashboardController extends Controller
         $slider->delete();
 
         return redirect()->route('dashboard.home')->with('success', 'Le slider à bien été suprimé.');
-
     }
-
 }
