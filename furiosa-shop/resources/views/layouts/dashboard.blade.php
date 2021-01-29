@@ -16,16 +16,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
-
     <!-- Style -->
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+    <link href="<?php echo asset('mselect/chosen.min.css') ?>" rel="stylesheet">
 
-
+    <link href="<?php echo asset('line-awesome/css/line-awesome.min.css') ?>" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.0.0/dist/css/axentix.min.css">
+
 
 
 
@@ -75,7 +76,7 @@
             <button data-target="example-sidenav" class="sidenav-trigger">
                 <i class="fas fa-times"></i>
             </button>
-            
+
         </div>
 
         <a href="{{ route('dashboard') }}" class="sidenav-link ">Dashboard</a>
@@ -89,10 +90,18 @@
 
     <main>
 
+        @if (session('success'))
+        <div style="width: 80%; margin-left: 10%; margin-right: auto;" class="p-3 my-2 rounded-2 success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         @yield('content')
 
     </main>
     @yield('footer')
+
+
 
 
     <!-- Vendor JS Files -->
@@ -100,6 +109,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0/dist/js/axentix.min.js"></script>
+    @yield('js-extra')
 
     <script>
         var sidenav = new Sidenav('.example-sidenav');

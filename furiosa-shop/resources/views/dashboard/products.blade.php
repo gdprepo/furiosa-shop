@@ -13,7 +13,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Image</th>
                 <th scope="col">Description</th>
@@ -30,7 +29,6 @@
             @foreach($products as $product)
 
             <tr>
-                <th scope="row">{{ $product->id }}</th>
                 <td>{{ $product->title }}</td>
                 <td style="width: 26%;"> <img style="width: 100%" class="img-fluid" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
                 </td>
@@ -44,7 +42,7 @@
                     <a href="{{ route('produit.show', $product->id) }}">
                         <button style="width: 100%;" type="button" class="btn btn-success">Edit</button>
                     </a>
-                    <form method="POST" action="{{ route('slider.delete', $product->id) }}">
+                    <form method="POST" action="{{ route('product.delete', $product->id) }}">
                     @csrf
                         <button style="width: 100%;" type="submit" class="btn btn-success">Delete</button>
                     </form>

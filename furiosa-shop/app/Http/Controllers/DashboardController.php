@@ -77,6 +77,10 @@ class DashboardController extends Controller
 
         $product->title = $request->input('title');
 
+        if ($request->input('description')) {
+            $product->description = $request->input('description');
+
+        }
 
         if ($request->input('categories')) {
             $product->categories()->sync([]);
@@ -113,39 +117,20 @@ class DashboardController extends Controller
 
                 }
 
-
-            // foreach ($request->file('images') as $image) {
-            //     $file = $image;
-            //     $extension = $file->getClientOriginalName();
-            //     $filename = time() . '.' . $extension;
-            //     $file->move(public_path() . '/uploads/products/', $filename);
-
-            //     $image  = new Image();
-            //     $image->name = $filename;
-            //     $image->slug = $filename;
-            //     $image->save();
-
-            //     $product->images()->attach([
-            //         $image->id
-            //     ]);
-            // }
-
-            // foreach ($_FILES['images'] as $image) {
-
-            //     $file = $image;
-            //     $extension = $file->getClientOriginalName();
-            //     $filename = time() . '.' . $extension;
-            //     $file->move(public_path() . '/uploads/products/', $filename);
-
-
-
-            // }
         }
 
 
         $product->save();
 
         return redirect()->route('dashboard.products')->with('success', 'La page home a bien mise a jour.');
+    }
+
+    public function productDelete(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->route('dashboard.products')->with('success', 'Le product à bien été suprimé.');
     }
 
     /**
