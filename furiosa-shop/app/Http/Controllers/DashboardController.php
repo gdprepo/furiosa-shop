@@ -79,7 +79,6 @@ class DashboardController extends Controller
 
         if ($request->input('description')) {
             $product->description = $request->input('description');
-
         }
 
         if ($request->input('categories')) {
@@ -96,27 +95,23 @@ class DashboardController extends Controller
         }
 
 
+        if ($request->hasFile('images')) {
+            $product->images()->sync([]);
 
+            foreach ($request->file('images') as $file) {
+                $extension = $file->getClientOriginalName();
+                $filename = time() . '.' . $extension;
+                $file->move(public_path() . '/uploads/products/', $filename);
 
-            if ($request->hasFile('images')) {
-                $product->images()->sync([]);
+                $image  = new Image();
+                $image->name = $filename;
+                $image->slug = $filename;
+                $image->save();
 
-                foreach ($request->file('images') as $file) {
-                    $extension = $file->getClientOriginalName();
-                    $filename = time() . '.' . $extension;
-                    $file->move(public_path() . '/uploads/products/', $filename);
-
-                    $image  = new Image();
-                    $image->name = $filename;
-                    $image->slug = $filename;
-                    $image->save();
-    
-                    $product->images()->attach([
-                        $image->id
-                    ]);
-
-                }
-
+                $product->images()->attach([
+                    $image->id
+                ]);
+            }
         }
 
 
@@ -159,6 +154,86 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.home')->with('success', 'La page home a bien mise a jour.');
     }
 
+    public function productNew()
+    {
+        $categories = Category::all();
+    
+        return view('dashboard.productAdd', [
+            'categories' => $categories
+        ]);
+    }
+
+
+    public function productAdd(Request $request)
+    {
+        $product = new Product();
+
+        $product->title = $request->input('title');
+
+        $product->slug = str_replace(' ', '', strtolower($request->input('title')));
+        $product->subtitle = strtolower($request->input('title'));
+
+
+        if ($request->input('description')) {
+            $product->description = $request->input('description');
+        }
+
+        if ($request->input('price')) {
+            $product->price = $request->input('price');
+        }
+
+
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/products/', $filename);
+            $product->image = $filename;
+            $product->save();
+        }
+
+
+        if ($request->input('categories')) {
+            $product->categories()->sync([]);
+
+            foreach ($request->input('categories') as $category) {
+
+                $category_id  = Category::where('name', $category)->first();
+
+                $product->categories()->attach([
+                    $category_id->id
+                ]);
+            }
+        }
+
+
+        if ($request->hasFile('images')) {
+            $product->images()->sync([]);
+
+            foreach ($request->file('images') as $file) {
+                $extension = $file->getClientOriginalName();
+                $filename = time() . '.' . $extension;
+                $file->move(public_path() . '/uploads/products/', $filename);
+
+                $image  = new Image();
+                $image->name = $filename;
+                $image->slug = $filename;
+                $image->save();
+
+                $product->images()->attach([
+                    $image->id
+                ]);
+            }
+        }
+
+
+        $product->save();
+
+
+        return redirect()->route('dashboard.products')->with('success', 'Le produit à bien été créé.');
+    }
+
 
     public function sliderEdit($id)
     {
@@ -173,6 +248,8 @@ class DashboardController extends Controller
     {
         return view('dashboard.sliderAdd', []);
     }
+
+
 
     public function sliderAdd(Request $request)
     {

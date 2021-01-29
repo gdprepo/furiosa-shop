@@ -36,6 +36,9 @@ Route::get('/admin/products', 'App\Http\Controllers\DashboardController@products
 Route::get('/admin/product/show/{id}', 'App\Http\Controllers\DashboardController@productEdit')->name('produit.show');
 Route::post('/admin/product/update/{id}', 'App\Http\Controllers\DashboardController@productStore')->name('product.update');
 Route::post('/admin/product/delete/{id}', 'App\Http\Controllers\DashboardController@productDelete')->name('product.delete');
+Route::get('/admin/product/new', 'App\Http\Controllers\DashboardController@productNew')->name('product.new');
+Route::post('/admin/product/add', 'App\Http\Controllers\DashboardController@productAdd')->name('product.add');
+
 
 
 

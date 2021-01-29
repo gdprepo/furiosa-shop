@@ -18,7 +18,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Categories</th>
                 <th style="text-align: unset;" scope="col">
-                    <a href="{{ route('slider.new') }}">
+                    <a href="{{ route('product.new') }}">
                         <button style="margin: 0; margin-right: -20%" type="button" class="btn btn-primary">Add</button>
                     </a>
                 </th>

@@ -16,9 +16,11 @@ $pageencours = $_SERVER['REQUEST_URI'];
 ?>
 
 
-<div style="position: absolute; margin-top: 150px;" class="">
-    <div style="margin-left: 8%; margin-right: auto !important;  width: 85%;" class="row">
-        <div style="margin-right: 8%" class="col-md-6">
+
+
+<div style="position: absolute; margin-top: 150px; width: 100%" class="">
+    <div style="margin-left: 8%; margin-right: auto !important;" class="row">
+        <div style="margin-right: 8%" class="col-md-5">
 
             <figure id="mainImg" style="width: 100%;" class="zoo-item" data-zoo-image="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}"></figure>
 
