@@ -16,6 +16,7 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Image</th>
                 <th scope="col">Description</th>
+                <th scope="col">Prix</th>
                 <th scope="col">Categories</th>
                 <th style="text-align: unset;" scope="col">
                     <a href="{{ route('product.new') }}">
@@ -33,6 +34,7 @@
                 <td style="width: 26%;"> <img style="width: 100%" class="img-fluid" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
                 </td>
                 <td>{{ substr($product->description, 0, 30) . '...' }}</td>
+                <td>{{ getPrice($product->price) }}</td>
                 <td>
                     @foreach($product->categories as $category)
                     {{ $category->name }}<br>

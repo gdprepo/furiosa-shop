@@ -65,7 +65,7 @@ $page = $_SERVER['REQUEST_URI'];
                                             </div>
                                         </div>
                                     </th>
-                                    <td style="padding: 0px; width: 20%" class="border-0 align-middle"><strong>{{ $product->model->getPrice($product->subtotal()) }}</strong></td>
+                                    <td style="padding: 0px; width: 20%" class="border-0 align-middle"><strong>{{ getPrice($product->subtotal()) }}</strong></td>
                                     <td class="border-0 align-middle">
                                         <select style="padding: 5px;" class="custom-select" name="qty" id="qty" data-id="{{ $product->rowId }}">
                                             @for ($i = 1; $i <= 5; $i++) <option value="{{ $i }}" {{ $product->qty == $i ? 'selected' : ''}}>
@@ -97,9 +97,9 @@ $page = $_SERVER['REQUEST_URI'];
                     <div class="">
                         <p class="font-italic mb-4">Les frais éventuels de livraison seront calculés suivant les informations que vous avez transmises.</p>
                         <ul class="list-unstyled mb-4">
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total </strong><strong>{{ $product->model->getPrice(Cart::subtotal()) }}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total </strong><strong>{{ getPrice(Cart::subtotal()) }}</strong></li>
 
-                            @if ($product->model->getPrice(Cart::subtotal()) >= 59.99)
+                            @if (getPrice(Cart::subtotal()) >= 59.99)
                             <li class="d-flex justify-content-between py-3"><strong class="text-muted">Livraison</strong><strong> 4.99 € </strong></li>
                             <li style="color: green" class="d-flex justify-content-between py-3 border-bottom"><strong>livraison gratuite</strong><strong>- 4.99 € </strong></li>
 
@@ -108,9 +108,9 @@ $page = $_SERVER['REQUEST_URI'];
 
                             @endif
 
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Taxe</strong><strong>{{ $product->model->getPrice(Cart::tax()) }}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Taxe</strong><strong>{{ getPrice(Cart::tax()) }}</strong></li>
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                <h5 class="font-weight-bold">{{ $product->model->getPrice(Cart::total() + 499) }}</h5>
+                                <h5 class="font-weight-bold">{{ getPrice(Cart::total() + 499) }}</h5>
                             </li>
                         </ul><a href="{{ route('cart.index') }}" class="btn btn-dark rounded-pill py-2 btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Payer</a>
                     </div>
@@ -182,7 +182,7 @@ $page = $_SERVER['REQUEST_URI'];
                                             </div>
                                         </div>
                                     </th>
-                                    <td class="border-0 align-middle"><strong>{{ getPrice($product->subtotal()) }}</strong></td>
+                                    <td class="border-0 align-middle"><strong>{{ getPrice(floatval($product->subtotal())* 1000) }}</strong></td>
                                     <td class="border-0 align-middle">
                                         <select class="custom-select" name="qty" id="qty" data-id="{{ $product->rowId }}">
                                             @for ($i = 1; $i <= 5; $i++) <option value="{{ $i }}" {{ $product->qty == $i ? 'selected' : ''}}>
@@ -216,8 +216,8 @@ $page = $_SERVER['REQUEST_URI'];
                     <div class="p-4">
                         <p class="font-italic mb-4">Les frais éventuels de livraison seront calculés suivant les informations que vous avez transmises.</p>
                         <ul class="list-unstyled mb-4">
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total </strong><strong>{{ $product->model->getPrice(Cart::subtotal()) }}</strong></li>
-                            @if ($product->model->getPrice(Cart::subtotal()) >= 59.99)
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total </strong><strong>{{ getPrice(floatval(Cart::subtotal())* 1000) }}</strong></li>
+                            @if (getPrice(Cart::subtotal()) >= 59.99)
                             <li class="d-flex justify-content-between py-3"><strong class="text-muted">Livraison</strong><strong> 4.99 € </strong></li>
                             <li style="color: green" class="d-flex justify-content-between py-3 border-bottom"><strong>livraison gratuite</strong><strong>- 4.99 € </strong></li>
 
@@ -226,13 +226,13 @@ $page = $_SERVER['REQUEST_URI'];
 
                             @endif
 
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Taxe</strong><strong>{{ $product->model->getPrice(Cart::tax()) }}</strong></li>
+                            <!-- <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Taxe</strong><strong>{{ getPrice(Cart::tax()) }}</strong></li> -->
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                @if ($product->model->getPrice(Cart::subtotal()) >= 59.99)
-                                <h5 class="font-weight-bold">{{ $product->model->getPrice(Cart::total())  }}</h5>
+                                @if (getPrice(Cart::subtotal()) >= 59.99)
+                                <h5 class="font-weight-bold">{{ getPrice(Cart::total())  }}</h5>
 
                                 @else
-                                <h5 class="font-weight-bold">{{ $product->model->getPrice(Cart::total() + 499)  }}</h5>
+                                <h5 class="font-weight-bold">{{ getPrice(floatval(Cart::total())* 1000 + 499) }}</h5>
 
                                 @endif
                             </li>
@@ -244,10 +244,13 @@ $page = $_SERVER['REQUEST_URI'];
     </div>
 </div>
 @else
-<div class="col-md-12">
-    <h5>Votre panier est vide pour le moment.</h5>
-    <p>Mais vous pouvez visiter la <a href="{{ route('cart.index') }}">boutique</a> pour faire votre shopping.
-    </p>
+<div style="padding-top:100px" class="container">
+    <div class="row col-md-6">
+        <h5>Votre panier est vide pour le moment.</h5>
+        <p>Mais vous pouvez visiter la <a href="{{ route('shop') }}">boutique</a> pour faire votre shopping.
+        </p>
+    </div>
+
 </div>
 @endif
 
