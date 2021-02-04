@@ -103,6 +103,11 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 <div style="position: absolute; margin-top: 150px; width: 100%; display: contents; margin-top: 130px" class="">
     <div style="margin-left: 8%; margin-right: auto !important; margin-top: 100px; display: -webkit-inline-flex" class="row">
+    @if (session('success'))
+        <div style="width: 80%; margin-left: 5%; margin-right: auto;" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <div style="margin-right: 8%" class="col-md-5">
 
             <figure id="mainImg" style="width: 100%;" class="zoo-item" data-zoo-image="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}"></figure>
@@ -138,27 +143,34 @@ $pageencours = $_SERVER['REQUEST_URI'];
             @else
 
             <div style="margin-top: 50px;">
-                <form action="">
-                <div style="display: flex">
-                    <strong style="color: white; font-size: 30px; margin-top: -5px; width: 100%" class="mb-4">{{ $product->getPrice() }}</strong>
+                <!-- <form action=""> -->
+                    <div style="display: flex">
+                        <strong style="color: white; font-size: 30px; margin-top: -5px; width: 100%" class="mb-4">{{ $product->getPrice() }}</strong>
 
-                    <select class="form-control rounded-1" id="select" required>
-                        <option value="">Choisir une taille</option>
-                        <option>Petit</option>
-                        <option>Moyen</option>
-                        <option>Grand</option>
-                    </select>
-                </div>
-
-                <div style="width: 100%; float:left; display: unset" class="buttons">
-                    <div style="background: none;" class="containerButton">
-                        <a style="background: white; float: left" href="/shop" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a>
+                        <select name="taille[]" class="form-control rounded-1" id="select" required>
+                            <option value="">Choisir une taille</option>
+                            <option>Petit</option>
+                            <option>Moyen</option>
+                            <option>Grand</option>
+                        </select>
                     </div>
-                </div>
+
+                    <div style="width: 100%; float:left; display: unset" class="buttons">
+                        <div style="background: none;" class="containerButton">
+                            <form style="z-index: 800" action="{{ route('cart.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                                <!-- <a style="background: white; float: left" type="submit" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a> -->
+            <button style="width: 100%; background-color: white; border: black; color: black; padding: 10px" type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ajouter au panier</button>
+                            
+                            </form>
+                        </div>
+                    </div>
 
 
 
-                </form>
+                <!-- </form> -->
 
 
                 <div style="margin-top: 50px; margin-left: -5%;">
@@ -204,28 +216,26 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
 <!-- ======= Footer ======= -->
 <footer style="background-color: rgba(255, 255, 255, 0.34); margin-top: 150px; padding-top: 50px;" class="footer" role="contentinfo">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-        <p class="mb-1">&copy; Copyright FuriosaAliShop. All Rights Reserved</p>
-        <div class="credits">
-          <!--
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="mb-1">&copy; Copyright FuriosaAliShop. All Rights Reserved</p>
+                <div class="credits">
+                    <!--
           All the links in the footer should remain intact.
           You can delete the links only if you purchased the pro version.
           Licensing information: https://bootstrapmade.com/license/
           Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
         -->
-          Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign -</a><a href="https://bootstrapmade.com/"> BootstrapMade</a>
+                    Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign -</a><a href="https://bootstrapmade.com/"> BootstrapMade</a>
+                </div>
+            </div>
+            <div class="col-sm-6 social text-md-right">
+                <a href="#"><span class="icofont-facebook"></span></a>
+                <a href="#"><span style="font-size: large;" class="fab fa-instagram"></span></a>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-6 social text-md-right">
-        <a href="#"><span class="icofont-twitter"></span></a>
-        <a href="#"><span class="icofont-facebook"></span></a>
-        <a href="#"><span class="icofont-dribbble"></span></a>
-        <a href="#"><span class="icofont-behance"></span></a>
-      </div>
     </div>
-  </div>
 </footer>
 @endsection
 

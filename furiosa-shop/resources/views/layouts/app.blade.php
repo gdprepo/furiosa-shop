@@ -41,12 +41,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/zoomove/1.2.1/zoomove.min.css">
     <link rel="stylesheet" href="<?php echo asset('css/zoom.css') ?>">
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://kit.fontawesome.com/69875fa1bc.js" crossorigin="anonymous"></script>
+
 
     <title>Furioza Ali - Shop</title>
+
+    @yield('extra-meta')
+
 
     <style>
         .link {
@@ -117,127 +121,139 @@
                 display: block;
             }
         }
-
-
     </style>
 </head>
 
 @if ((strpos(Route::currentRouteName(), 'shop.show') === 0))
-    <body style="background-image: linear-gradient(216deg, rgba(77, 77, 77,0.05) 0%, rgba(77, 77, 77,0.05) 25%,rgba(42, 42, 42,0.05) 25%, rgba(42, 42, 42,0.05) 38%,rgba(223, 223, 223,0.05) 38%, rgba(223, 223, 223,0.05) 75%,rgba(36, 36, 36,0.05) 75%, rgba(36, 36, 36,0.05) 100%),linear-gradient(44deg, rgba(128, 128, 128,0.05) 0%, rgba(128, 128, 128,0.05) 34%,rgba(212, 212, 212,0.05) 34%, rgba(212, 212, 212,0.05) 57%,rgba(25, 25, 25,0.05) 57%, rgba(25, 25, 25,0.05) 89%,rgba(135, 135, 135,0.05) 89%, rgba(135, 135, 135,0.05) 100%),linear-gradient(241deg, rgba(55, 55, 55,0.05) 0%, rgba(55, 55, 55,0.05) 14%,rgba(209, 209, 209,0.05) 14%, rgba(209, 209, 209,0.05) 60%,rgba(245, 245, 245,0.05) 60%, rgba(245, 245, 245,0.05) 69%,rgba(164, 164, 164,0.05) 69%, rgba(164, 164, 164,0.05) 100%),linear-gradient(249deg, rgba(248, 248, 248,0.05) 0%, rgba(248, 248, 248,0.05) 32%,rgba(148, 148, 148,0.05) 32%, rgba(148, 148, 148,0.05) 35%,rgba(202, 202, 202,0.05) 35%, rgba(202, 202, 202,0.05) 51%,rgba(181, 181, 181,0.05) 51%, rgba(181, 181, 181,0.05) 100%),linear-gradient(92deg, hsl(214,0%,11%),hsl(214,0%,11%));">
+
+<body style="background-image: linear-gradient(216deg, rgba(77, 77, 77,0.05) 0%, rgba(77, 77, 77,0.05) 25%,rgba(42, 42, 42,0.05) 25%, rgba(42, 42, 42,0.05) 38%,rgba(223, 223, 223,0.05) 38%, rgba(223, 223, 223,0.05) 75%,rgba(36, 36, 36,0.05) 75%, rgba(36, 36, 36,0.05) 100%),linear-gradient(44deg, rgba(128, 128, 128,0.05) 0%, rgba(128, 128, 128,0.05) 34%,rgba(212, 212, 212,0.05) 34%, rgba(212, 212, 212,0.05) 57%,rgba(25, 25, 25,0.05) 57%, rgba(25, 25, 25,0.05) 89%,rgba(135, 135, 135,0.05) 89%, rgba(135, 135, 135,0.05) 100%),linear-gradient(241deg, rgba(55, 55, 55,0.05) 0%, rgba(55, 55, 55,0.05) 14%,rgba(209, 209, 209,0.05) 14%, rgba(209, 209, 209,0.05) 60%,rgba(245, 245, 245,0.05) 60%, rgba(245, 245, 245,0.05) 69%,rgba(164, 164, 164,0.05) 69%, rgba(164, 164, 164,0.05) 100%),linear-gradient(249deg, rgba(248, 248, 248,0.05) 0%, rgba(248, 248, 248,0.05) 32%,rgba(148, 148, 148,0.05) 32%, rgba(148, 148, 148,0.05) 35%,rgba(202, 202, 202,0.05) 35%, rgba(202, 202, 202,0.05) 51%,rgba(181, 181, 181,0.05) 51%, rgba(181, 181, 181,0.05) 100%),linear-gradient(92deg, hsl(214,0%,11%),hsl(214,0%,11%));">
 
     @else
+
     <body>
 
-    @endif
+        @endif
 
-    <aside class="sidebar">
+        <aside class="sidebar">
 
-        <div class="side-inner">
+            <div class="side-inner">
 
-            <div class="logo">
-                <span>L</span>
+                <div class="logo">
+                    <span>L</span>
 
-            </div>
+                </div>
 
-            <div class="nav-menu">
-                <div class="shopSide">
-                    <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
+                <div class="nav-menu">
+                    <div class="shopSide">
+                        <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
+                        <ul>
+                            <li><a href="#">Categorie1</a></li>
+                            <li><a href="#">Categorie2</a></li>
+                            <li><a href="#">Categorie3</a></li>
+
+                        </ul>
+                        <hr>
+
+                    </div>
+
+
                     <ul>
                         <li><a href="#">Categorie1</a></li>
                         <li><a href="#">Categorie2</a></li>
                         <li><a href="#">Categorie3</a></li>
+                        @if (Auth::check())
+                        @if (Auth::user()->role === "ROLE_ADMIN")
+                        <li><a href="/admin">Admin</a></li>
+                        @endif
+                        @else
+                        <li><a href="/login">Login</a></li>
+                        @endif
 
                     </ul>
-                    <hr>
+                </div>
 
+            </div>
+
+        </aside>
+
+        <main style="">
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+
+                <a style="color: white" class="navbar-brand" href="/">FURIOZ<strong style="color: black;">ALI</strong></a>
+
+
+
+                <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'activeLink' : 'link' }}" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'activeLink' : 'link' }}" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'activeLink' : 'link' }}" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'activeLink' : 'link' }}" href="/shop">Shop</a>
+                    </li>
+
+                </ul>
+
+                <span style="margin-bottom: 20px; z-index:2; margin-right: -3%" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
+
+                <div id="bag" style="margin-right: 2%">
+                    <a style="color: white" href="{{ route('cart.index') }}">
+                        <i style="font-size: xx-large;" class="fas fa-shopping-bag"></i>
+                    </a>
+                </div>
+
+                <div style="padding: 10px; margin-right: 20px; float: right; right: 0;" class="toggle">
+                    <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                        <span style="color: white"></span>
+                    </a>
                 </div>
 
 
-                <ul>
-                    <li><a href="#">Categorie1</a></li>
-                    <li><a href="#">Categorie2</a></li>
-                    <li><a href="#">Categorie3</a></li>
-                    @if (Auth::check())
-                    @if (Auth::user()->role === "ROLE_ADMIN")
-                    <li><a href="/admin">Admin</a></li>
-                    @endif
-                    @else
-                    <li><a href="/login">Login</a></li>
-                    @endif
 
-                </ul>
+            </nav>
+
+            <div class="">
+                @yield('content')
             </div>
 
-        </div>
-
-    </aside>
-
-    <main style="">
-
-        <nav class="navbar navbar-expand-lg navbar-light">
-
-            <a style="color: white" class="navbar-brand" href="/">FURIOZ<strong style="color: black;">ALI</strong></a>
+            @yield('footer')
 
 
 
-            <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto nav-item">
-                <li class="nav-item">
-                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'activeLink' : 'link' }}" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'activeLink' : 'link' }}" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'activeLink' : 'link' }}" href="/contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'activeLink' : 'link' }}" href="/shop">Shop</a>
-                </li>
 
-            </ul>
+            <!-- Vendor JS Files -->
+            <script src="<?php echo asset('jquery/jquery.min.js') ?>"></script>
+            <script src="<?php echo asset('bootstrap/js/bootstrap.bundle.min.js') ?> "></script>
+            <script src="<?php echo asset('jquery.easing/jquery.easing.min.js') ?>"></script>
+            <script src="<?php echo asset('php-email-form/validate.js') ?>"></script>
+            <script src="<?php echo asset('aos/aos.js') ?>"></script>
+            <script src="<?php echo asset('isotope-layout/isotope.pkgd.min.js') ?>"></script>
+            <script src="<?php echo asset('owl.carousel/owl.carousel.min.js') ?>"></script>
 
 
 
-            <div style="padding: 10px; margin-right: 20px; float: right; right: 0;" class="toggle">
-                <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
-                    <span style="color: white"></span>
-                </a>
-            </div>
-
-
-
-        </nav>
-
-        <div class="">
-            @yield('content')
-        </div>
-
-        @yield('footer')
-
-
-        <!-- Vendor JS Files -->
-        <script src="<?php echo asset('jquery/jquery.min.js') ?>"></script>
-        <script src="<?php echo asset('bootstrap/js/bootstrap.bundle.min.js') ?> "></script>
-        <script src="<?php echo asset('jquery.easing/jquery.easing.min.js') ?>"></script>
-        <script src="<?php echo asset('php-email-form/validate.js') ?>"></script>
-        <script src="<?php echo asset('aos/aos.js') ?>"></script>
-        <script src="<?php echo asset('isotope-layout/isotope.pkgd.min.js') ?>"></script>
-        <script src="<?php echo asset('owl.carousel/owl.carousel.min.js') ?>"></script>
-
-        <!-- Template Main JS File -->
-        <script src="<?php echo asset('js/mainShop.js') ?>"></script>
+            <!-- Template Main JS File -->
+            <script src="<?php echo asset('js/mainShop.js') ?>"></script>
 
 
 
 
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="<?php echo asset('js/popper.min.js') ?>"></script>
-        <script src="<?php echo asset('js/bootstrap.min.js') ?>"></script>
-        <script src="<?php echo asset('js/main.js') ?>"></script>
-        
-        @yield('script-extra')
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-</body>
+            @yield('script-extra')
+
+            <script src="<?php echo asset('js/popper.min.js') ?>"></script>
+            <script src="<?php echo asset('js/bootstrap.min.js') ?>"></script>
+            <script src="<?php echo asset('js/main.js') ?>"></script>
+
+
+    </body>
 
 </html>

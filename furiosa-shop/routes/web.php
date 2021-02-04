@@ -53,6 +53,13 @@ Route::post('/admin/slider/delete/{id}', 'App\Http\Controllers\DashboardControll
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+
+
+Route::get('/panier', 'App\Http\Controllers\CartController@index')->name('cart.index');
+Route::post('/panier/ajouter', 'App\Http\Controllers\CartController@store')->name('cart.store');
+Route::patch('/panier/{rowId}', 'App\Http\Controllers\CartController@update')->name('cart.update');
+Route::delete('/panier/{rowId}', 'App\Http\Controllers\CartController@destroy')->name('cart.destroy');
+
 // Route::get('/shop', 'HomeController@shop')->name('shop');
 
 
