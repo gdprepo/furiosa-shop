@@ -45,31 +45,30 @@
 
         <div class="grix xs4">
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Image :</span>
+
+                <div class="form-file">
+                    <label for="img" class="btn primary rounded-1 shadow-1">Image</label>
+                    <input type="file" name="image" id="img" multiple accept="image/png, image/jpeg" />
+                    <div class="form-file-path"></div>
                 </div>
-                <div class="custom-file">
-                    <input name="image" type="file" class="custom-file-input" id="inputGroupFile01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choisir l'image principale</label>
-                </div>
+
             </div>
             <div class="col-xs3">
-                <img style="width: 50%" class="d-block" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
+                <img style="width: 50%; margin-left: 20%" class="d-block" src="{{ $product->image != 'https://via.placeholder.com/450x450' ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
             </div>
 
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Images :</span>
+                <div class="form-file">
+                    <label for="img2" class="btn primary rounded-1 shadow-1">Images</label>
+                    <input type="file" name="images[]" id="img2" multiple="mutiple" accept="image/png, image/jpeg" />
+                    <div class="form-file-path"></div>
                 </div>
-                <div class="custom-file">
-                    <input multiple="multiple" name="images[]" type="file" class="custom-file-input" id="inputGroupFile02">
-                    <label class="custom-file-label" for="inputGroupFile02">Choisir une ou plusieurs images</label>
-                </div>
+
             </div>
-            <div style="display: flex;" class="col-xs3">
+            <div style="display: flex; float:right; margin-left: 20%" class="col-xs3">
                 @foreach($product->images as $image)
-                <img style="width: 23%; height: 100px; padding: 10px" class="d-block" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
+                <img style="width: 150px; height: 150px; padding: 10px" class="d-block" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt="First slide">
                 @endforeach
             </div>
 
@@ -81,9 +80,9 @@
             <label>Taille disponibles :
 
 
-                    {{ $product->taille }}
+                {{ $product->taille }}
 
- 
+
 
 
             </label>
