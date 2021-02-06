@@ -52,13 +52,13 @@ class CartController extends Controller
 
         $product = Product::find($request->product_id);
 
-        $color = $request->taille;
-        if ($color != "Choisir une taille") {
-            Cart::add($product->id, $product->title, 1, $product->price)
+        $taille = $request->taille;
+
+        if ($taille != "Choisir une taille") {
+            Cart::add($product->id, $product->title, 1, $product->price, [$taille])
                 ->associate('App\Models\Product');
         } else {
-            Cart::add($product->id, $product->title, 1, $product->price)
-                ->associate('App\Models\Product');
+            return redirect()->route('shop.show', $request->product_id)->with('success', 'Choisir une taille.');
         }
 
 

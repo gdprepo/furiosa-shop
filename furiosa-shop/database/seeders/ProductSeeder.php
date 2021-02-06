@@ -26,6 +26,8 @@ class ProductSeeder extends Seeder
                 'description' => $faker->text,
                 'price' => $faker->numberBetween(15, 300) * 100,
                 'image' => 'https://via.placeholder.com/450x450',
+                'taille' => '[]',
+                'home' => false
             ])->images()->attach([
                     rand(1, 4),
                     rand(1, 4)

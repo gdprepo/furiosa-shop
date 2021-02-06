@@ -21,6 +21,8 @@ class CreateProductTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->string('image');
+            $table->json('taille');
+            $table->boolean('home');
             $table->timestamps();
         });
     }

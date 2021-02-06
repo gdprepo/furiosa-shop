@@ -76,6 +76,22 @@ class DashboardController extends Controller
         }
 
         $product->title = $request->input('title');
+        if ($request->input('home') != null) {
+            $product->home = true;
+            
+        } else {
+            $product->home = false;
+
+        }
+
+        if ($request->input('taille')) {
+            $product->taille = "";
+        
+            $product->taille = $request->input('taille');
+            
+        
+
+        }
 
         if ($request->input('description')) {
             $product->description = $request->input('description');

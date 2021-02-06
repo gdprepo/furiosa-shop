@@ -21,7 +21,7 @@ class HomeController extends Controller
         //$user = DB::table('users')->where('name', 'like', 'admin')->first();
         $slider1 = Sliders::where('name', 'slider1')->get();
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::where('home', true)->get();
 
         // var_dump($slider1);
 

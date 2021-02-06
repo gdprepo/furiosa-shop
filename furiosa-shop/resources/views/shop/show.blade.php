@@ -101,13 +101,17 @@ $pageencours = $_SERVER['REQUEST_URI'];
 </style>
 
 
-<div style="position: absolute; margin-top: 150px; width: 100%; display: contents; margin-top: 130px" class="">
-    <div style="margin-left: 8%; margin-right: auto !important; margin-top: 100px; display: -webkit-inline-flex" class="row">
+<div style="position: absolute; margin-top: 150px; width: 100%; display: contents; margin-top: 130px" class="container">
     @if (session('success'))
-        <div style="width: 80%; margin-left: 5%; margin-right: auto;" class="alert alert-success">
+    <div style="padding-top: 100px; margin-bottom: -50px">
+        <div style="width: 80%; margin-left: 10%; margin-right: auto;" class="alert alert-success">
             {{ session('success') }}
         </div>
-        @endif
+    </div>
+
+    @endif
+    <div style="margin-left: 8%; width: 85%; margin-right: auto !important; margin-top: 100px; display: -webkit-inline-flex" class="grix xs2">
+
         <div style="margin-right: 8%" class="col-md-5">
 
             <figure id="mainImg" style="width: 100%;" class="zoo-item" data-zoo-image="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}"></figure>
@@ -141,63 +145,67 @@ $pageencours = $_SERVER['REQUEST_URI'];
 
             </div>
             @else
+            <form style="z-index: 800" action="{{ route('cart.store') }}" method="POST">
 
-            <div style="margin-top: 50px;">
-                <!-- <form action=""> -->
+                <div style="margin-top: 50px;">
+                    <!-- <form action=""> -->
                     <div style="display: flex">
                         <strong style="color: white; font-size: 30px; margin-top: -5px; width: 100%" class="mb-4">{{ $product->getPrice() }}</strong>
 
-                        <select name="taille[]" class="form-control rounded-1" id="select" required>
+                        <select style="width: 100%;" name="taille" class="form-control rounded-1" id="select" required>
                             <option value="">Choisir une taille</option>
-                            <option>Petit</option>
-                            <option>Moyen</option>
-                            <option>Grand</option>
+                            @if ($product->taille != [])
+                            <?php $json = (array)json_decode($product->taille) ?>
+                            @foreach($json as $obj)
+                            <option>{{ $obj }}</option>
+        
+                            @endforeach
+                            @endif
                         </select>
                     </div>
 
                     <div style="width: 100%; float:left; display: unset" class="buttons">
                         <div style="background: none;" class="containerButton">
-                            <form style="z-index: 800" action="{{ route('cart.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                                <!-- <a style="background: white; float: left" type="submit" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a> -->
-            <button style="width: 100%; background-color: white; border: black; color: black; padding: 10px" type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ajouter au panier</button>
-                            
-                            </form>
+                            <!-- <a style="background: white; float: left" type="submit" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a> -->
+                            <button style="width: 100%; background-color: white; border: black; color: black; padding: 10px" type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ajouter au panier</button>
+
                         </div>
                     </div>
 
+            </form>
 
 
-                <!-- </form> -->
+            <!-- </form> -->
 
 
-                <div style="margin-top: 50px; margin-left: -5%;">
-                    <img class="img-thumbnail img-fluid" style=" max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
+            <div style="margin-top: 50px; margin-left: -5%;">
+                <img class="img-thumbnail img-fluid" style=" max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
 
-                    <?php
+                <?php
 
-                    foreach ($product->images as $image) {
-                    ?>
-
-
-                        <img class="img-thumbnail" style="max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
-
-                    <?php } ?>
+                foreach ($product->images as $image) {
+                ?>
 
 
-                </div>
+                    <img class="img-thumbnail" style="max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
+
+                <?php } ?>
+
+
             </div>
-
-            @endif
-            @if ($iPhone || $iPad || $iPad || $Android)
-            <span style="margin-top: 20px; margin-bottom: 0px">{!! $product->description !!}</span>
-            @endif
-
         </div>
 
+        @endif
+        @if ($iPhone || $iPad || $iPad || $Android)
+        <span style="margin-top: 20px; margin-bottom: 0px">{!! $product->description !!}</span>
+        @endif
+
     </div>
+
+</div>
 
 
 </div>
