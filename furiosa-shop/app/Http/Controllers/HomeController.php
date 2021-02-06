@@ -35,8 +35,11 @@ class HomeController extends Controller
 
     public function shop()
     {
+        $categories = Category::all();
+        $products = Product::all();
         return view ('shop.index', [
-
+            'categories' => $categories,
+            'products' => $products,
         ]);
     }
 

@@ -31,76 +31,109 @@
 
         <div id="filters" class="filters">
           <a href="#" data-filter="*" class="active">All</a>
-          <a href="#" data-filter=".web\.petit">Web</a>
-          <a href="#" data-filter=".design">Design</a>
-          <a href="#" data-filter=".branding">Branding</a>
-          <a href="#" data-filter=".photography">Photography</a>
+          @foreach($categories as $category)
+          <a href="#" data-filter=".{{ $category->name }}">{{ $category->name }}</a>
+          @endforeach
           <select style="border: none;" id="filters2" class="filters" aria-label="Default select example">
 
             <option value="" selected>Choisir une taille</option>
-            <option value=".petit">Petit</option>
-            <option value=".moyen">Moyen</option>
-            <option value=".grand">Grand</option>
+            <option value=".Petit">Petit</option>
+            <option value=".Moyen">Moyen</option>
+            <option value=".Grand">Grand</option>
           </select>
         </div>
       </div>
     </div>
+    <?php $index = 0; ?>
     <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-      <div class="item web petit col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
+      @foreach($products as $product)
+      @if ($index < 10) <?php
+                        $categories = [];
+                        foreach ($product->categories as $category) {
+                          // $categories = $category->name;
+                          array_push($categories, $category->name);
+                        }
+
+                        $tailles = [];
+                        $json = (array)json_decode($product->taille);
+                        foreach ($json as $taille) {
+                          // $categories = $category->name;
+                          array_push($tailles, $taille);
+                        }
+
+                        ?> <div class="item
+      {{ implode(' ', $categories) }} {{ implode(' ', $tailles) }}
+      
+       col-sm-6 col-md-4 col-lg-4 mb-4">
+        <a href="/shop/{{ $product->id }}" class="item-wrap fancybox">
           <div class="work-info">
-            <h3>Boxed Water</h3>
-            <span>Web</span>
+            <h3>{{ $product->title }}</h3>
+            <span>{{ $categories[0] }}<br></span>
+            <span>{{ $product->getPrice() }}</span>
+
           </div>
-          <img class="img-fluid" src="images/img_1.jpg">
+          <img class="img-fluid" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}">
         </a>
-      </div>
-      <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Build Indoo</h3>
-            <span>Photography</span>
-          </div>
-          <img class="img-fluid" src="images/img_2.jpg">
-        </a>
-      </div>
-      <div class="item petit branding col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Cocooil</h3>
-            <span>Branding</span>
-          </div>
-          <img class="img-fluid" src="images/img_3.jpg">
-        </a>
-      </div>
-      <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Nike Shoe</h3>
-            <span>Design</span>
-          </div>
-          <img class="img-fluid" src="images/img_4.jpg">
-        </a>
-      </div>
-      <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Kitchen Sink</h3>
-            <span>Photography</span>
-          </div>
-          <img class="img-fluid" src="images/img_5.jpg">
-        </a>
-      </div>
-      <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-        <a href="work-single.html" class="item-wrap fancybox">
-          <div class="work-info">
-            <h3>Amazon</h3>
-            <span>brandingn</span>
-          </div>
-          <img class="img-fluid" src="images/img_6.jpg">
-        </a>
-      </div>
     </div>
+    @endif
+    <?php $index++; ?>
+
+    @endforeach
+    <div class="item web petit col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Boxed Water</h3>
+          <span>Web</span>
+        </div>
+        <img class="img-fluid" src="images/img_1.jpg">
+      </a>
+    </div>
+    <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Build Indoo</h3>
+          <span>Photography</span>
+        </div>
+        <img class="img-fluid" src="images/img_2.jpg">
+      </a>
+    </div>
+    <div class="item petit branding col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Cocooil</h3>
+          <span>Branding</span>
+        </div>
+        <img class="img-fluid" src="images/img_3.jpg">
+      </a>
+    </div>
+    <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Nike Shoe</h3>
+          <span>Design</span>
+        </div>
+        <img class="img-fluid" src="images/img_4.jpg">
+      </a>
+    </div>
+    <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Kitchen Sink</h3>
+          <span>Photography</span>
+        </div>
+        <img class="img-fluid" src="images/img_5.jpg">
+      </a>
+    </div>
+    <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
+      <a href="work-single.html" class="item-wrap fancybox">
+        <div class="work-info">
+          <h3>Amazon</h3>
+          <span>brandingn</span>
+        </div>
+        <img class="img-fluid" src="images/img_6.jpg">
+      </a>
+    </div>
+  </div>
   </div>
 </section><!-- End  Works Section -->
 
