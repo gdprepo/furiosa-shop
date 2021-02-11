@@ -112,7 +112,7 @@ $page = $_SERVER['REQUEST_URI'];
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                                 <h5 class="font-weight-bold">{{ getPrice(Cart::total() + 499) }}</h5>
                             </li>
-                        </ul><a href="{{ route('cart.index') }}" class="btn btn-dark rounded-pill py-2 btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Payer</a>
+                        </ul><a href="{{ route('checkout.index') }}" class="btn btn-dark rounded-pill py-2 btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Payer</a>
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@ $page = $_SERVER['REQUEST_URI'];
 
                                 @endif
                             </li>
-                        </ul><a href="{{ route('cart.index') }}" class="btn btn-dark rounded-pill py-2 btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Payer</a>
+                        </ul><a href="{{ route('checkout.index') }}" class="btn btn-dark rounded-pill py-2 btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Payer</a>
                     </div>
                 </div>
             </div>

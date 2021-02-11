@@ -60,6 +60,14 @@ Route::post('/panier/ajouter', 'App\Http\Controllers\CartController@store')->nam
 Route::patch('/panier/{rowId}', 'App\Http\Controllers\CartController@update')->name('cart.update');
 Route::delete('/panier/{rowId}', 'App\Http\Controllers\CartController@destroy')->name('cart.destroy');
 
+
+
+Route::get('/paiement', 'App\Http\Controllers\CheckoutController@index')->name('checkout.index');
+Route::post('/paiement', 'App\Http\Controllers\CheckoutController@livraisonStore')->name('livraison.check');
+Route::post('/paiementCheckout', 'App\Http\Controllers\CheckoutController@store')->name('checkout.store');
+Route::get('/merci', 'App\Http\Controllers\CheckoutController@thankYou')->name('checkout.thankYou');
+//Route::get('/merciPaypal', 'App\Http\Controllers\PaymentController@thanks')->name('checkout.thanks');
+
 // Route::get('/shop', 'HomeController@shop')->name('shop');
 
 
