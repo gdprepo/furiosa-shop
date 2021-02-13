@@ -8,10 +8,7 @@
 
 @section('extra-script')
 <script src="https://js.stripe.com/v3/"></script>
-<script
-    src="https://www.paypal.com/sdk/js?client-id=AWiGhyoOKLcFxrP2h3u8_gYHamFW6Nc8VBzlZ75brYqyUkDjFbwIsdaRiFAu9oUUUFQywe0-WGfex5Pn">
-    // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-    </script>
+
 
 
 @endsection
@@ -35,7 +32,7 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
 @if ($iPhone || $iPad || $iPad || $Android)
 <div class="" style="width: 100%;">
     <div
-        style="margin-left: 10%; margin-top: -75px; background: #d8d8d8; width: 80%; text-align: center; padding: 10px; border-radius: 15px">
+        style="margin-left: 10%; margin-top: 30px; margin-bottom: 150px; background: #d8d8d8; width: 80%; text-align: center; padding: 10px; border-radius: 15px">
         <h3 class="login-content-title">DÉJÀ <span>MEMBRE ?</span></h3>
         <a href="{{ route('login') }}">Me connecter</a>
     </div>
@@ -115,7 +112,7 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
                         <button type="submit" name="submit"
                             style="margin-top: 40px; width: 80%; padding: 5px; margin-left: 10%; height: 50px"
                             class="btn btn-warning"><img style="width: 30%; margin-top: -22px"
-                                src="{{ asset('/images/icons/paypal.png') }}" alt=""></button>
+                                src="{{ asset('/images/paypal.png') }}" alt=""></button>
 
                         @else
                         <button type="submit" name="submit"
@@ -355,9 +352,23 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
                             @endif</h6>
                         <small class="text-muted">{{ substr( $product->description, 0, 10) }}</small>
                     </div>
-                    <span class="text-muted">{{ getPrice($product->subtotal()) }}</span>
+                    <span class="text-muted">{{ getPrice(floatval($product->subtotal()) * 1000) }}</span>
                 </li>
                 @endforeach
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Livraison</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span class="text-muted">{{ getPrice(floatval(499)) }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Total</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span class="text-muted">{{ getPrice(floatval(Cart::total()) * 1000 + 499) }}</span>
+                </li>
 
 
 
@@ -369,15 +380,10 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
 </div>
 @endsection
 
-@section('extra-js')
+@section('script-extra')
 
-<script type="text/javascript">
-
-
-
-</script>
 <script>
-    var stripe = Stripe('pk_live_51Gty04FbyARdQqIBUBz4EG1uWSpJ1RGH28psRyCtCQnUphGyscdkETRhWkHdZCPlg6dLw6FueEm1HVMAisMhoceV00DMvMGuMg');
+    var stripe = Stripe('pk_test_51IJhpWAFIgadoHQ3SZqYGLVbXONuwWtusUGOEemr3HelIDej8X8pAs5AAR8asqMFHkb4ukhNvqAtY2HiKWUvX5Ni00xBZjFS4s');
 
     var elements = stripe.elements();
 
@@ -449,12 +455,15 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
                 form.disabled = false;
                 console.log(result.error.message);
             } else {
+                console.log('coucou');
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
+                console.log('coucou2');
+
                     var paymentIntent = result.paymentIntent;
                     var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     var url = form.action;
-                    var redirect = '/merci';
+                    var redirect = '/site/public/merci';
 
                     fetch(
                         url, {
@@ -467,7 +476,7 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
                         method: 'POST',
                         body: JSON.stringify({
                             paymentIntent: paymentIntent,
-                            adresse: document.getElementById('adresse').value,
+                            adresse: document.getElementById('address').value,
                             nom: document.getElementById('nom').value,
                             prenom: document.getElementById('prenom').value,
                             ville: document.getElementById('ville').value,
@@ -491,55 +500,6 @@ $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
 
 
 
-    $(document).ready(function () {
-        $('#payer').css('display', 'block');
-        $('#check').css('display', 'block');
-        $('#info').css('display', 'block');
-
-
-        $('#confirmer').click(function () {
-            console.log("click!!!");
-            var nom = $('#nom').val();
-            var prenom = $('#prenom').val();
-            var adresse = $('#adresse').val();
-            var adresse2 = $('#adresse2').val();
-            var ville = $('#ville').val();
-            var codepostal = $('#codepostal').val();
-            var pays = $('#pays').val();
-            var email = $('#email').val();
-
-
-            console.log(nom + prenom);
-
-
-            if (nom && prenom && adresse && ville && codepostal && pays) {
-                $('#livraison').css('display', 'none');
-                $('#payer').css('display', 'block');
-                $('#check').css('display', 'block');
-                $('#info').css('display', 'none');
-
-
-                document.getElementById("paypalNom").value = nom;
-                document.getElementById("paypalPrenom").value = prenom;
-                document.getElementById("paypalAdresse").value = adresse;
-                document.getElementById("paypalAdresse2").value = adresse2;
-                document.getElementById("paypalVille").value = ville;
-                document.getElementById("paypalCpl").value = codepostal;
-                document.getElementById("paypalPays").value = pays;
-                document.getElementById("commandeEmail").value = email;
-
-
-            } else {
-
-                alert("Remplir les informations de livraison.");
-
-
-            }
-
-        })
-
-
-    });
 </script>
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>

@@ -2,6 +2,18 @@
 
 @section('content')
 
+<?php
+    $iPod    = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+    $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+    $iPad    = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
+    $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
+    $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
+
+    $pageencours = $_SERVER['PHP_SELF'];
+    $page = $_SERVER['REQUEST_URI'];
+
+    ?>
+
 <style>
     input {
         box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
@@ -12,7 +24,14 @@
     }
 </style>
 
+@if ($iPhone || $iPad || $iPad || $Android)
+
+<section style="padding-top: 30px" class="section pb-5">
+
+@else 
 <section style="padding-top: 150px" class="section pb-5">
+
+@endif
     <div class="container">
 
         <div class="row mb-5 align-items-end">
@@ -95,30 +114,59 @@
 
 
 @section('footer')
+@if ($iPhone || $iPad || $iPad || $Android)
 
-  <!-- ======= Footer ======= -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <p class="mb-1">&copy; Copyright FuriosaAliShop. All Rights Reserved</p>
-          <div class="credits">
-            <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
-        -->
-            Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign -</a><a href="https://bootstrapmade.com/"> BootstrapMade</a>
-          </div>
-        </div>
-        <div class="col-sm-6 social text-md-right">
-          <a href="#"><span class="icofont-twitter"></span></a>
-          <a href="#"><span class="icofont-facebook"></span></a>
-          <a href="#"><span class="icofont-dribbble"></span></a>
-          <a href="#"><span class="icofont-behance"></span></a>
+<!-- ======= Footer ======= -->
+<footer style="padding: 0 0 4rem 0px; text-align: center" class="footer" role="contentinfo">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="mb-1">&copy; Copyright FuriosaAliShop. All Rights Reserved</p>
+        <div class="credits">
+          <!--
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
+      -->
+          Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign -</a><a href="https://bootstrapmade.com/"> BootstrapMade</a>
         </div>
       </div>
+      <div class="col-sm-6 social text-md-right">
+        <a href="#"><span class="icofont-twitter"></span></a>
+        <a href="#"><span class="icofont-facebook"></span></a>
+        <a href="#"><span class="icofont-dribbble"></span></a>
+        <a href="#"><span class="icofont-behance"></span></a>
+      </div>
     </div>
-  </footer>
+  </div>
+</footer>
+@else 
+
+<!-- ======= Footer ======= -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="mb-1">&copy; Copyright FuriosaAliShop. All Rights Reserved</p>
+        <div class="credits">
+          <!--
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
+      -->
+          Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign -</a><a href="https://bootstrapmade.com/"> BootstrapMade</a>
+        </div>
+      </div>
+      <div class="col-sm-6 social text-md-right">
+        <a href="#"><span class="icofont-twitter"></span></a>
+        <a href="#"><span class="icofont-facebook"></span></a>
+        <a href="#"><span class="icofont-dribbble"></span></a>
+        <a href="#"><span class="icofont-behance"></span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+@endif
 @endsection

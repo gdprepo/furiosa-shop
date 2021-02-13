@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @yield('extra-meta')
+
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
@@ -49,7 +52,21 @@
 
     <title>Furioza Ali - Shop</title>
 
-    @yield('extra-meta')
+    @yield('extra-script')
+
+
+
+    <?php
+    $iPod    = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+    $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+    $iPad    = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
+    $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
+    $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
+
+    $pageencours = $_SERVER['PHP_SELF'];
+    $page = $_SERVER['REQUEST_URI'];
+
+    ?>
 
 
     <style>
@@ -139,13 +156,26 @@
             <div class="side-inner">
 
                 <div class="logo">
-                    <span>L</span>
+                    <img style="border-radius: 50%; width: 130%; border:1px solid black;" src="{{ asset('images/logo.jpg') }}" alt="">
 
                 </div>
+
+                @if ($iPhone || $iPad || $iPad || $Android)
 
                 <div class="nav-menu">
                     <div class="shopSide">
                         <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
+                        <ul>
+                            <li class="{{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'active' : '' }}"><a href="/">Home</a></li>
+                            <li class="{{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'active' : '' }}"><a href="/shop">Shop</a></li>
+                            <li class="{{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'active' : '' }}"><a href="/about">About</a></li>
+                            <li class="{{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'active' : '' }}"><a href="/contact">Contact</a></li>
+
+
+                        </ul>
+
+                        <hr>
+
                         <ul>
                             <li><a href="#">Categorie1</a></li>
                             <li><a href="#">Categorie2</a></li>
@@ -158,9 +188,7 @@
 
 
                     <ul>
-                        <li><a href="#">Categorie1</a></li>
-                        <li><a href="#">Categorie2</a></li>
-                        <li><a href="#">Categorie3</a></li>
+
                         @if (Auth::check())
                         @if (Auth::user()->role === "ROLE_ADMIN")
                         <li><a href="/admin">Admin</a></li>
@@ -170,17 +198,83 @@
                         @endif
 
                     </ul>
-                </div>
 
-            </div>
+
+                    @else
+
+                    <div class="nav-menu">
+
+                        <ul>
+                            <li><a href="#">Categorie1</a></li>
+                            <li><a href="#">Categorie2</a></li>
+                            <li><a href="#">Categorie3</a></li>
+                            <hr>
+
+                            @if (Auth::check())
+                            @if (Auth::user()->role === "ROLE_ADMIN")
+                            <li><a href="/admin">Admin</a></li>
+                            @endif
+                            @else
+                            <li><a href="/login">Login</a></li>
+                            @endif
+
+                        </ul>
+
+                        @endif
+
+
+                    </div>
+
+                </div>
 
         </aside>
 
         <main style="">
 
+            @if ($iPhone || $iPad || $iPad || $Android)
+            <nav style="position: relative; background-color: grey" class="navbar navbar-expand-lg navbar-light">
+
+                <a style="color: white" class="navbar-brand" href="/">FURIOS<strong style="color: black;">ALI</strong></a>
+
+
+
+                <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'activeLink' : 'link' }}" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'activeLink' : 'link' }}" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'activeLink' : 'link' }}" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'activeLink' : 'link' }}" href="/shop">Shop</a>
+                    </li>
+
+                </ul>
+
+                <span style="margin-bottom: 20px; z-index:2; margin-right: -12%" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
+
+                <div id="bag" style="">
+                    <a style="color: white" href="{{ route('cart.index') }}">
+                        <i style="font-size: xx-large;" class="fas fa-shopping-bag"></i>
+                    </a>
+                </div>
+
+                <div style="padding: 10px; margin-left: 15px; float: right; right: 0;" class="toggle">
+                    <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                        <span style="color: white"></span>
+                    </a>
+                </div>
+
+
+
+            </nav>
+            @else
             <nav class="navbar navbar-expand-lg navbar-light">
 
-                <a style="color: white" class="navbar-brand" href="/">FURIOZ<strong style="color: black;">ALI</strong></a>
+                <a style="color: white" class="navbar-brand" href="/">FURIOS<strong style="color: black;">ALI</strong></a>
 
 
 
@@ -217,6 +311,11 @@
 
 
             </nav>
+
+            @endif
+
+
+
 
             <div class="">
                 @yield('content')

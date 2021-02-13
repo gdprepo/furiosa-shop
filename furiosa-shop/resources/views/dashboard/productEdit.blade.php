@@ -28,17 +28,26 @@
         <div class="grix xs2">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Titre: {{ $product->title }}</span>
+                    <span class="input-group-text" id="basic-addon1">Titre:</span>
                 </div>
                 <input value="{{ $product->title }}" name="title" type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Titre: {{ $product->description }}</span>
+                    <span class="input-group-text" id="basic-addon1">Slug:</span>
+                </div>
+                <input value="{{ $product->slug }}" name="slug" type="text" class="form-control" aria-label="Slug" aria-describedby="basic-addon1">
+            </div>  
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Description:</span>
                 </div>
                 <textarea value="{{ $product->description }}" name="description" type="text" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1"></textarea>
             </div>
+
+          
 
 
         </div>

@@ -84,6 +84,11 @@ class DashboardController extends Controller
 
         }
 
+        if ($request->input('slug')) {
+            $product->slug = $request->input('slug');
+            
+        }
+
         if ($request->input('taille')) {
             $product->taille = "";
         
