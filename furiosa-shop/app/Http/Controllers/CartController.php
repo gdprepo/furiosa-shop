@@ -47,7 +47,7 @@ class CartController extends Controller
         });
 
         if ($duplicata->isNotEmpty()) {
-            return redirect()->route('shop.show', $request->product_id)->with('success', 'Le produit a déjà été ajouté.');
+            return redirect()->route('shop.show', ['slug' => $request->slug])->with('success', 'Le produit a déjà été ajouté.');
         }
 
         $product = Product::find($request->product_id);
@@ -58,14 +58,14 @@ class CartController extends Controller
             Cart::add($product->id, $product->title, 1, $product->price, [$taille])
                 ->associate('App\Models\Product');
         } else {
-            return redirect()->route('shop.show', $request->product_id)->with('success', 'Choisir une taille.');
+            return redirect()->route('shop.show', ['slug' => $request->slug])->with('success', 'Choisir une taille.');
         }
 
 
         // var_dump($request->color);
         // exit;
 
-        return redirect()->route('shop.show', $request->product_id)->with('success', 'Le produit a bien été ajouté.');
+        return redirect()->route('shop.show', ['slug' => $request->slug])->with('success', 'Le produit a bien été ajouté.');
     }
 
     /**

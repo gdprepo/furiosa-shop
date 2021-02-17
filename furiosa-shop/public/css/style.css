@@ -91,11 +91,11 @@ aside {
       display: none; }
     aside .side-inner .logo {
       width: 50px;
-      height: 50px;
+      height: unset;
 
       border-radius: 50%;
       position: relative;
-      margin: 0 auto 50px 40px; }
+      margin: 0 auto 30px 40px; }
       aside .side-inner .logo span {
         position: absolute;
         color: #fff;

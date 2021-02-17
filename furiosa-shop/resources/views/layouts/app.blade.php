@@ -49,6 +49,7 @@
 
     <script src="https://kit.fontawesome.com/69875fa1bc.js" crossorigin="anonymous"></script>
 
+    @yield('link-extra')
 
     <title>Furioza Ali - Shop</title>
 
@@ -139,6 +140,27 @@
             }
         }
     </style>
+
+    @if ($iPad)
+    <style>
+        .badge-pill {
+            margin-right: -5.5%;
+        }
+    </style>
+    @elseif ($iPhone || $Android)
+
+    <style>
+        .badge-pill {
+            margin-right: -12%
+        }
+    </style>
+    @else
+    <style>
+        .badge-pill {
+            margin-right: -3%;
+        }
+    </style>
+    @endif
 </head>
 
 @if ((strpos(Route::currentRouteName(), 'shop.show') === 0))
@@ -153,18 +175,19 @@
 
         <aside class="sidebar">
 
-            <div class="side-inner">
+            <div id="example-sidenav" class="side-inner">
 
+
+
+                @if ($iPhone || $Android)
                 <div class="logo">
                     <img style="border-radius: 50%; width: 130%; border:1px solid black;" src="{{ asset('images/logo.jpg') }}" alt="">
 
                 </div>
-
-                @if ($iPhone || $iPad || $iPad || $Android)
-
                 <div class="nav-menu">
+                    <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
+
                     <div class="shopSide">
-                        <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
                         <ul>
                             <li class="{{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'active' : '' }}"><a href="/">Home</a></li>
                             <li class="{{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'active' : '' }}"><a href="/shop">Shop</a></li>
@@ -176,18 +199,18 @@
 
                         <hr>
 
-                        <ul>
-                            <li><a href="#">Categorie1</a></li>
-                            <li><a href="#">Categorie2</a></li>
-                            <li><a href="#">Categorie3</a></li>
-
-                        </ul>
-                        <hr>
 
                     </div>
 
 
                     <ul>
+
+                        <li><a href="#">Categorie1</a></li>
+                        <li><a href="#">Categorie2</a></li>
+                        <li><a href="#">Categorie3</a></li>
+
+                        <hr>
+
 
                         @if (Auth::check())
                         @if (Auth::user()->role === "ROLE_ADMIN")
@@ -199,15 +222,40 @@
 
                     </ul>
 
+                    @elseif ($iPad )
+                    <div style="float: right; margin-right: 30px; margin-top: 10px">
+                        <i id="close" style="font-size: 45px; float:right" class="fas fa-times"></i>
 
-                    @else
-
+                    </div>
+                    <div class="logo row">
+                        <img style="border-radius: 50%; width: 65px; height: 65px; border:1px solid black;" src="{{ asset('images/logo.jpg') }}" alt="">
+                    </div>
                     <div class="nav-menu">
+                        <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
+
+                        <div class="shopSide">
+                            <ul>
+                                <li class="{{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'active' : '' }}"><a href="/">Home</a></li>
+                                <li class="{{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'active' : '' }}"><a href="/shop">Shop</a></li>
+                                <li class="{{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'active' : '' }}"><a href="/about">About</a></li>
+                                <li class="{{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'active' : '' }}"><a href="/contact">Contact</a></li>
+
+
+                            </ul>
+
+                            <hr>
+
+
+
+                        </div>
+
 
                         <ul>
                             <li><a href="#">Categorie1</a></li>
                             <li><a href="#">Categorie2</a></li>
                             <li><a href="#">Categorie3</a></li>
+
+
                             <hr>
 
                             @if (Auth::check())
@@ -219,19 +267,42 @@
                             @endif
 
                         </ul>
+                        @else
+                        <div class="logo">
+                            <img style="border-radius: 50%; width: 130%; border:1px solid black;" src="{{ asset('images/logo.jpg') }}" alt="">
 
-                        @endif
+                        </div>
+                        <div class="nav-menu">
+                        <h3 style="text-align:center; letter-spacing: 5px; font-size: 20px; margin-bottom: 15px">Shop</h3>
 
+                            <ul>
+
+                                <li><a href="#">Categorie1</a></li>
+                                <li><a href="#">Categorie2</a></li>
+                                <li><a href="#">Categorie3</a></li>
+                                <hr>
+                                @if (Auth::check())
+                                @if (Auth::user()->role === "ROLE_ADMIN")
+                                <li><a href="/admin">Admin</a></li>
+                                @endif
+                                @else
+                                <li><a href="/login">Login</a></li>
+                                @endif
+
+                            </ul>
+
+                            @endif
+
+
+                        </div>
 
                     </div>
-
-                </div>
 
         </aside>
 
         <main style="">
 
-            @if ($iPhone || $iPad || $iPad || $Android)
+            @if ($iPhone|| $webOS || $Android)
             <nav style="position: relative; background-color: grey" class="navbar navbar-expand-lg navbar-light">
 
                 <a style="color: white" class="navbar-brand" href="/">FURIOS<strong style="color: black;">ALI</strong></a>
@@ -254,7 +325,7 @@
 
                 </ul>
 
-                <span style="margin-bottom: 20px; z-index:2; margin-right: -12%" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
+                <span style="margin-bottom: 20px; z-index:2;" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
 
                 <div id="bag" style="">
                     <a style="color: white" href="{{ route('cart.index') }}">
@@ -263,6 +334,46 @@
                 </div>
 
                 <div style="padding: 10px; margin-left: 15px; float: right; right: 0;" class="toggle">
+                    <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                        <span style="color: white"></span>
+                    </a>
+                </div>
+
+
+
+            </nav>
+            @elseif ($iPad )
+            <nav style="position: relative;" class="navbar navbar-expand-lg navbar-light">
+
+                <a style="color: white" class="navbar-brand" href="/">FURIOS<strong style="color: black;">ALI</strong></a>
+
+
+
+                <ul style="text-align: center; display: -webkit-inline-box;" class="navbar-nav mx-auto nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'activeLink' : 'link' }}" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'about') === 0) ? 'activeLink' : 'link' }}" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'contact') === 0) ? 'activeLink' : 'link' }}" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'shop') === 0) ? 'activeLink' : 'link' }}" href="/shop">Shop</a>
+                    </li>
+
+                </ul>
+
+                <span style="margin-bottom: 20px; z-index:2;" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
+
+                <div id="bag" style="margin-right: 2%">
+                    <a style="color: white" href="{{ route('cart.index') }}">
+                        <i style="font-size: xx-large;" class="fas fa-shopping-bag"></i>
+                    </a>
+                </div>
+
+                <div style="padding: 10px; margin-right: 20px; float: right; right: 0;" class="toggle">
                     <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
                         <span style="color: white"></span>
                     </a>
@@ -294,7 +405,7 @@
 
                 </ul>
 
-                <span style="margin-bottom: 20px; z-index:2; margin-right: -3%" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
+                <span style="margin-bottom: 20px; z-index:2;" class="badge badge-pill badge-info text-white">{{ Cart::count() }}</span>
 
                 <div id="bag" style="margin-right: 2%">
                     <a style="color: white" href="{{ route('cart.index') }}">
@@ -323,11 +434,12 @@
 
             @yield('footer')
 
+            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
+            @yield('script-extra')
 
 
             <!-- Vendor JS Files -->
-            <script src="<?php echo asset('jquery/jquery.min.js') ?>"></script>
             <script src="<?php echo asset('bootstrap/js/bootstrap.bundle.min.js') ?> "></script>
             <script src="<?php echo asset('jquery.easing/jquery.easing.min.js') ?>"></script>
             <script src="<?php echo asset('php-email-form/validate.js') ?>"></script>
@@ -343,10 +455,19 @@
 
 
 
+            <script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0/dist/js/axentix.min.js"></script>
 
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-            @yield('script-extra')
+
+            <script>
+                let exampleSidenav = new Axentix.Sidenav('#example-sidenav');
+
+                $('#close').on('click', function() {
+                    $('body').removeClass('show-sidebar');
+                    $('.burger').removeClass('active');
+                })
+            </script>
 
             <script src="<?php echo asset('js/popper.min.js') ?>"></script>
             <script src="<?php echo asset('js/bootstrap.min.js') ?>"></script>

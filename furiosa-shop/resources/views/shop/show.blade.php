@@ -112,7 +112,7 @@ $page = $_SERVER['REQUEST_URI'];
 
 ?>
 
-@if ($iPhone || $iPad || $iPad || $Android)
+@if ($iPhone || $Android)
 
 <div style="position: absolute; width: 100%; display: contents; margin-top: 50px" class="container">
     @if (session('success'))
@@ -135,7 +135,7 @@ $page = $_SERVER['REQUEST_URI'];
 
         <div style="padding-top: 300px" class="col-12">
 
-        <div class="row" style="margin-top: 30px; margin-left: -5%;">
+            <div class="row" style="margin-top: 30px; margin-left: -5%;">
                 <img class="img-thumbnail img-fluid col-4" style="width: 100%; padding: 2px; max-height: 100px" src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
 
                 <?php
@@ -198,6 +198,7 @@ $page = $_SERVER['REQUEST_URI'];
                         <div style="background: none;" class="containerButton">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="slug" value="{{ $product->slug }}">
 
                             <!-- <a style="background: white; float: left" type="submit" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a> -->
                             <button style="width: 120%; background-color: white; border: black; color: black; padding: 10px; margin: 0" type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ajouter au panier</button>
@@ -211,6 +212,117 @@ $page = $_SERVER['REQUEST_URI'];
             <!-- </form> -->
 
 
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+@elseif ($iPad )
+
+
+<div style="position: absolute; width: 100%; display: contents; margin-top: 50px" class="container">
+    @if (session('success'))
+    <div style="padding-top: 50px;">
+        <div style="width: 80%; margin-left: 10%; margin-right: auto;" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    </div>
+
+    @endif
+    <div style="margin-left: 8%; width: 85%; margin-right: auto !important; margin-top: 50px; display: absolute" class="">
+
+        <div style="padding: 0; z-index: 10000" class="col-12">
+
+            <figure id="mainImg" style="width: 100%; height: 500px" class="zoo-item" data-zoo-image="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}"></figure>
+
+
+        </div>
+
+
+        <div style="padding-top: 500px" class="col-12">
+
+            <div class="row" style="margin-top: 30px; width: 60%">
+                <img class="img-thumbnail img-fluid col-4" style="width: 100%; padding: 2px; height: 130px " src="{{ file_exists(public_path('uploads/products/' .$product->image)) ? asset('uploads/products/' .$product->image ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
+
+                <?php
+
+                foreach ($product->images as $image) {
+                ?>
+
+
+                    <img class="img-thumbnail img-fluid col-4" style="width: 100%; padding: 2px; height: 130px" src="{{ file_exists(public_path('uploads/products/' .$image->name)) ? asset('uploads/products/' .$image->name ) : 'https://via.placeholder.com/450x450' }}" alt=""> </a>
+
+                <?php } ?>
+
+
+            </div>
+
+
+
+            <!-- </form> -->
+
+
+
+        </div>
+
+        <div>
+
+
+
+
+            <form style="z-index: 800" action="{{ route('cart.store') }}" method="POST">
+                <div class="row" style="width: 100%">
+
+                    <div class="col-7">
+                        <h2 style="font-size: 2em; color: white;" class="mb-4 mt-4">{{ $product->title }}</h2>
+
+                        <span style="margin-top: 20px; margin-bottom: 0px; color: white">{!! $product->description !!}</span>
+
+
+
+                    </div>
+                    <div class="col-5" style="margin-top: 30px;">
+
+                        <div style="display: block">
+                            <strong style="color: white; font-size: 30px; margin-top: -5px; width: 50%; margin-bottom: 20px" class="">{{ $product->getPrice() }} <br> </strong>
+
+                            <select style="width: 100%; margin-top: 20px" name="taille" class="form-control rounded-1" id="select" required>
+                                <option value="">Choisir une taille</option>
+                                @if ($product->taille != [])
+                                <?php $json = (array)json_decode($product->taille) ?>
+                                @foreach($json as $obj)
+                                <option>{{ $obj }}</option>
+
+                                @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div style="width: 100%; float:right; display: unset" class="buttons col-6">
+                        <div style="background: none;" class="containerButton">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="slug" value="{{ $product->slug }}">
+
+                            <!-- <a style="background: white; float: left" type="submit" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a> -->
+                            <button style="width: 310px; background-color: white; border: black; color: black; padding: 15px; margin: 0; font-size: 20px" type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ajouter au panier</button>
+
+                        </div>
+                    </div>
+            </form>
 
         </div>
 
@@ -298,6 +410,7 @@ $page = $_SERVER['REQUEST_URI'];
                         <div style="background: none;" class="containerButton">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="slug" value="{{ $product->slug }}">
 
                             <!-- <a style="background: white; float: left" type="submit" class="btnPlus effect04" data-sm-link-text="Au panier" target="_blank"><span>Ajouter</span></a> -->
                             <button style="width: 100%; background-color: white; border: black; color: black; padding: 10px" type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ajouter au panier</button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\About;
 use App\Models\Product;
 use App\Models\Sliders;
 use App\Models\Category;
@@ -14,6 +15,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->user = User::where('name', 'like', 'admin')->first();
+        $this->middleware('auth');
+
     }
 
 
@@ -62,8 +65,10 @@ class HomeController extends Controller
 
     public function about()
     {
+        $about = About::all();
+    
         return view ('pages.about', [
-
+            'about' => $about[0],
         ]);
     }
 

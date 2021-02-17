@@ -1,0 +1,41 @@
+#portfolio {
+	padding: 40px;
+	margin: 0 auto;
+}
+
+.gallery-title {
+	font-size: 36px;
+	color: grey;
+	text-align: center;
+	font-weight: 700;
+	padding: 40px 20px 60px;
+}
+
+.filter-button {
+	font-size: 18px;
+	border: 1px solid rgb(176, 176, 176);
+	border-radius: 5px;
+	text-align: center;
+	color: rgb(176, 176, 176);
+	margin-bottom: 30px;
+}
+
+.filter-button:hover {
+	font-size: 18px;
+	border: 1px solid rgb(93, 93, 93);
+	border-radius: 5px;
+	color: #fff;
+	background-color: rgb(176, 176, 176);
+}
+
+.active {
+	background-color: rgb(176, 176, 176);
+	color: #fff;
+
+}
+
+.gallery_product {
+	margin-bottom: 30px;
+
+	
+}

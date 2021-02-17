@@ -34,6 +34,55 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        $slider2 = Sliders::where('name', 'slider2')->get();
+
+        return view('dashboard.about', [
+            'sliders' => $slider2,
+        ]);
+    }
+
+
+    public function categories()
+    {
+        $categories = Category::all();
+
+        return view('dashboard.categories', [
+            'categories' => $categories,
+        ]);
+    }
+
+    public function categoryEdit($id)
+    {
+        $category = Category::find($id);
+
+        return view('dashboard.categoryEdit', [
+            'category' => $category
+        ]);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function categoryStore(Request $request, $id)
+    {
+        $category = Category::find($id);
+
+
+        $category->name = $request->name;
+        $category->slug = $request->slug;
+
+        $category->save();
+
+        return redirect()->route('dashboard.categories')->with('success', 'La categorie a bien été mise a jour.');
+
+    }
+
 
     public function products()
     {
@@ -138,7 +187,7 @@ class DashboardController extends Controller
 
         $product->save();
 
-        return redirect()->route('dashboard.products')->with('success', 'La page home a bien mise a jour.');
+        return redirect()->route('dashboard.products')->with('success', 'La page home a bien été mise a jour.');
     }
 
     public function productDelete(Request $request, $id)
@@ -147,6 +196,14 @@ class DashboardController extends Controller
         $product->delete();
 
         return redirect()->route('dashboard.products')->with('success', 'Le product à bien été suprimé.');
+    }
+
+    public function categoryDelete(Request $request, $id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect()->route('dashboard.categories')->with('success', 'La categorie à bien été suprimé.');
     }
 
     /**
@@ -182,6 +239,27 @@ class DashboardController extends Controller
         return view('dashboard.productAdd', [
             'categories' => $categories
         ]);
+    }
+
+    public function categoryNew()
+    {
+        $categories = Category::all();
+    
+        return view('dashboard.categoryAdd', [
+            'categories' => $categories
+        ]);
+    }
+
+    public function categoryAdd(Request $request)
+    {
+        $category = new Category();
+
+        $category->name = $request->input('name');
+        $category->slug = $request->input('slug');
+
+        $category->save();
+
+        return redirect()->route('dashboard.categories')->with('success', 'La categorie à bien été créé.');
     }
 
 
