@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Sliders;
 use App\Models\Category;
-use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +37,11 @@ class DashboardController extends Controller
 
     public function about()
     {
-        $slider2 = Sliders::where('name', 'slider2')->get();
+        $about = About::find(1);
 
         return view('dashboard.about', [
-            'sliders' => $slider2,
+
+            'about' => $about,
         ]);
     }
 
@@ -206,6 +208,53 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.categories')->with('success', 'La categorie à bien été suprimé.');
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function aboutStore(Request $request, $id)
+    {
+        $slider1 = About::find($id);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/images/', $filename);
+            $slider1->image = $filename;
+            $slider1->save();
+        }
+
+        if ($request->hasFile('img_profile')) {
+            $file = $request->file('img_profile');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/images/', $filename);
+            $slider1->img_profile = $filename;
+            $slider1->save();
+        }
+
+        if ($request->input('title')) {
+            $slider1->title = $request->input('title');
+        }
+
+        if ($request->input('text')) {
+            $slider1->text = $request->input('text');
+        }
+
+        if ($request->input('description')) {
+            $slider1->description = $request->input('description');
+        }
+
+        $slider1->save();
+
+        return redirect()->route('dashboard.about')->with('success', 'La page home a bien mise a jour.');
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -333,6 +382,14 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.products')->with('success', 'Le produit à bien été créé.');
     }
 
+    public function aboutEdit($id)
+    {
+        $about = About::find($id);
+
+        return view('dashboard.aboutEdit', [
+            'about' => $about,
+        ]);
+    }
 
     public function sliderEdit($id)
     {

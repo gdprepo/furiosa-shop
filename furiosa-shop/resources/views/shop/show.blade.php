@@ -181,17 +181,18 @@ $page = $_SERVER['REQUEST_URI'];
 
                     <div style="display: block">
                         <strong style="color: white; font-size: 30px; margin-top: -5px; width: 100%; margin-bottom: 20px" class="">{{ $product->getPrice() }} <br> </strong>
+                        @if ($product->taille != "[]")
 
                         <select style="width: 100%; margin-top: 20px" name="taille" class="form-control rounded-1" id="select" required>
                             <option value="">Choisir une taille</option>
-                            @if ($product->taille != [])
                             <?php $json = (array)json_decode($product->taille) ?>
                             @foreach($json as $obj)
                             <option>{{ $obj }}</option>
 
                             @endforeach
-                            @endif
                         </select>
+                        @endif
+
                     </div>
 
                     <div style="width: 100%; float:left; display: unset" class="buttons">
@@ -297,16 +298,18 @@ $page = $_SERVER['REQUEST_URI'];
                         <div style="display: block">
                             <strong style="color: white; font-size: 30px; margin-top: -5px; width: 50%; margin-bottom: 20px" class="">{{ $product->getPrice() }} <br> </strong>
 
+                            @if ($product->taille != [])
+
                             <select style="width: 100%; margin-top: 20px" name="taille" class="form-control rounded-1" id="select" required>
                                 <option value="">Choisir une taille</option>
-                                @if ($product->taille != [])
                                 <?php $json = (array)json_decode($product->taille) ?>
                                 @foreach($json as $obj)
                                 <option>{{ $obj }}</option>
 
                                 @endforeach
-                                @endif
                             </select>
+                            @endif
+
                         </div>
 
                     </div>
@@ -394,16 +397,18 @@ $page = $_SERVER['REQUEST_URI'];
                     <div style="display: flex">
                         <strong style="color: white; font-size: 30px; margin-top: -5px; width: 100%" class="mb-4">{{ $product->getPrice() }}</strong>
 
+                        @if ($product->taille != "[]")
+
                         <select style="width: 100%;" name="taille" class="form-control rounded-1" id="select" required>
                             <option value="">Choisir une taille</option>
-                            @if ($product->taille != [])
                             <?php $json = (array)json_decode($product->taille) ?>
                             @foreach($json as $obj)
                             <option>{{ $obj }}</option>
 
                             @endforeach
-                            @endif
                         </select>
+                        @endif
+
                     </div>
 
                     <div style="width: 100%; float:left; display: unset" class="buttons">
@@ -485,7 +490,7 @@ $page = $_SERVER['REQUEST_URI'];
           Licensing information: https://bootstrapmade.com/license/
           Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
         -->
-                    Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign -</a><a href="https://bootstrapmade.com/"> BootstrapMade</a>
+                    Designed by <a href="https://www.gd-cvonline.site/">DepaireDesign</a>
                 </div>
             </div>
             <div class="col-sm-6 social text-md-right">

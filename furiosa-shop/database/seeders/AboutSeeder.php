@@ -16,6 +16,7 @@ class AboutSeeder extends Seeder
     {
         DB::table('abouts')->insert([
             'title' => "ABOUT",
+            'image' => 'https://via.placeholder.com/900x300',
             'img_profile' => 'https://via.placeholder.com/500x500',
             'text' => 'Artiste. tatoueuse art peinture tableau',
             'description' => 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget

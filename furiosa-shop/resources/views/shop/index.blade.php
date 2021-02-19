@@ -38,9 +38,8 @@
 
   .gallery_product:hover {
     -webkit-filter: grayscale(100%) !important;
-	filter: grayscale(100%) !important;
+    filter: grayscale(100%) !important;
   }
-
 </style>
 
 
@@ -98,14 +97,13 @@ $page = $_SERVER['REQUEST_URI'];
 
 @endif
 
-
-
 <section class="" id="portfolio">
   <div class="container">
-    <div class="gallery col-lg-12 mx-auto">
-      <h1 class="gallery-title">Gallery Furiosa</h1>
+    <div class="gallery col-lg-12 mx-auto" style="z-index: 1;">
+      <h1 style="letter-spacing: 3;" class="gallery-title">Gallery Furiosa</h1>
     </div>
-    <div>
+
+    <div style="text-align: center; z-index: 1000; margin-top: 0px;">
       <button class="btn btn-default filter-button active" data-filter="all">All</button>
       @foreach($categories as $category)
       <?php $string = "";
@@ -113,6 +111,12 @@ $page = $_SERVER['REQUEST_URI'];
       <button class="btn btn-default filter-button" data-filter="{{ $string }}">{{ $category->name }}</button>
 
       @endforeach
+        <br>
+
+        <button  class="btn btn-default filter-button" data-filter="petit">Petit</button>
+        <button  class="btn btn-default filter-button" data-filter="moyen">Moyen</button>
+        <button class="btn btn-default filter-button" data-filter="grand">Grand</button>
+
 
     </div>
 
@@ -136,9 +140,9 @@ $page = $_SERVER['REQUEST_URI'];
 
       $tailles = [];
       $json = (array)json_decode($product->taille);
-      foreach ($json as $taille) {
+      foreach ($json as $size) {
         // $categories = $category->name;
-        array_push($tailles, $taille);
+        array_push($tailles, $size);
       }
 
       ?>
@@ -273,6 +277,9 @@ $page = $_SERVER['REQUEST_URI'];
 
 
 @section('script-extra')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="<?php echo asset('js/jquery.filterizr.min.js') ?>"></script>
 <script src="<?php echo asset('js/popper.min.js') ?>"></script>
 
@@ -290,7 +297,7 @@ $page = $_SERVER['REQUEST_URI'];
       }
 
       $(".filter-button").removeClass('active');
-        $(this).addClass('active');
+      $(this).addClass('active');
     });
 
 

@@ -33,6 +33,8 @@ Route::get('/admin', 'App\Http\Controllers\DashboardController@index')->name('da
 Route::get('/admin/home', 'App\Http\Controllers\DashboardController@home')->name('dashboard.home');
 Route::get('/admin/products', 'App\Http\Controllers\DashboardController@products')->name('dashboard.products');
 Route::get('/admin/categories', 'App\Http\Controllers\DashboardController@categories')->name('dashboard.categories');
+Route::get('/admin/about', 'App\Http\Controllers\DashboardController@about')->name('dashboard.about');
+
 
 
 Route::get('/admin/product/edit/{id}', 'App\Http\Controllers\DashboardController@productEdit')->name('produit.show');
@@ -44,13 +46,13 @@ Route::post('/admin/product/add', 'App\Http\Controllers\DashboardController@prod
 Route::get('/admin/category/edit/{id}', 'App\Http\Controllers\DashboardController@categoryEdit')->name('category.show');
 Route::post('/admin/category/update/{id}', 'App\Http\Controllers\DashboardController@categoryStore')->name('category.update');
 Route::post('/admin/category/delete/{id}', 'App\Http\Controllers\DashboardController@categoryDelete')->name('category.delete');
-
 Route::get('/admin/category/new', 'App\Http\Controllers\DashboardController@categoryNew')->name('category.new');
 Route::post('/admin/category/add', 'App\Http\Controllers\DashboardController@categoryAdd')->name('category.add');
 
 
 
-
+Route::get('/admin/about/show/{id}', 'App\Http\Controllers\DashboardController@aboutEdit')->name('about.show');
+Route::post('/admin/about/update/{id}', 'App\Http\Controllers\DashboardController@aboutStore')->name('about.update');
 
 
 Route::get('/admin/slider/show/{id}', 'App\Http\Controllers\DashboardController@sliderEdit')->name('slider.show');
